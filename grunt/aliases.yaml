@@ -1,0 +1,20 @@
+default:
+ - 'dev'
+
+dev:
+  - 'clean'
+  - 'js'
+  - 'less'
+  - 'preprocess'
+  - 'connect'
+  - 'watch'
+
+js:
+  - 'jshint'
+#  - 'tests'
+
+build:
+  - 'clean'
+  - 'js'
+  - 'less'
+  - 'preprocess'
