@@ -4,7 +4,7 @@ module.exports = function (grunt, options) {
 
     js: {
       files: ['<%= jshint.all %>'],
-      tasks: ['js'],
+      tasks: ['jshint'],
       options: {
         interrupt: true
       }

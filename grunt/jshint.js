@@ -9,8 +9,8 @@ module.exports = function (grunt, options) {
     all: [
       'Gruntfile.js',
       'grunt/*.js',
-      'app/src/*.js',
-      'app/spec/*.js'
+      'app/js/src/*.js',
+      'app/js/tests/*.js'
     ]
 
   };

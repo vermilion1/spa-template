@@ -3,20 +3,23 @@ default:
 
 dev:
   - 'clean'
-  - 'js'
+  - 'jshint'
   - 'less'
   - 'preprocess:dev'
+  - 'htmlmin'
   - 'connect'
   - 'watch'
 
-js:
-  - 'jshint'
-#  - 'tests'
-
 build:
   - 'clean'
-  - 'js'
+  - 'jshint'
   - 'requirejs'
   - 'less'
   - 'copy:prod'
   - 'preprocess:prod'
+  - 'htmlmin'
+
+release:
+  - 'build'
+  - 'uglify'
+  - 'cssmin'
