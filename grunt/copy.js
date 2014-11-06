@@ -9,6 +9,12 @@ module.exports = function (grunt, options) {
           dest: 'dist/js',
           expand: true,
           src: '*'
+        },
+        {
+          cwd: 'app/images',
+          dest: 'dist/images',
+          expand: true,
+          src: '**'
         }
       ]
     }

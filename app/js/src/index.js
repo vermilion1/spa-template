@@ -1,9 +1,11 @@
 require([
-  'helpers/utils'
+  'helpers/utils',
+  'jquery'
 ],
 
-function (utils) {
+function (utils, $) {
 
-  console.log(utils.noop());
+  $('[data-loading]').addClass('loading--finished');
+  $('[data-main]').show();
 
 });

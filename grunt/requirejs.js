@@ -15,7 +15,8 @@ module.exports = function (grunt, options) {
         removeCombined: true,
         optimize: '',
         paths: {
-          helpers: 'src/helpers'
+          helpers: 'src/helpers',
+          jquery: 'vendor/jquery'
         },
         modules: [
           {
