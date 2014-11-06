@@ -5,7 +5,9 @@ module.exports = function (grunt, options) {
     prod: {
       options: {
         removeComments: true,
-        collapseWhitespace: true
+        collapseWhitespace: true,
+        minifyJS: true,
+        minifyCSS: true
       },
       files: {
         'dist/index.html': 'dist/index.html'

@@ -4,7 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="description" content="<!-- @echo description -->" />
   <title><!-- @echo title --></title>
+  <!-- @ifdef dev -->
   <link rel="stylesheet" href="stylesheets/loading.css" />
+  <!-- @endif -->
+  <!-- @ifndef dev -->
+  <style>
+    <!-- @include ../dist/stylesheets/loading.css -->
+  </style>
+  <!-- @endif -->
 </head>
 <body>
 
@@ -16,8 +23,7 @@
 
   <script>
     // TODO:
-    // 1. Embed loading css to the page
-    // 2. Load resources below using JS to avoid page blocking
+    // Load resources below using JS to avoid page blocking
   </script>
 
   <!-- @ifdef dev -->
