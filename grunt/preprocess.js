@@ -9,7 +9,17 @@ module.exports = function (grunt, options) {
       }
     },
 
-    index: {
+    dev: {
+      src: 'app/index.html',
+      dest: 'dist/index.html',
+      options: {
+        context: {
+          dev: true
+        }
+      }
+    },
+
+    prod: {
       src: 'app/index.html',
       dest: 'dist/index.html'
     }

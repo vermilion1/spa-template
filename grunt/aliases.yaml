@@ -5,7 +5,7 @@ dev:
   - 'clean'
   - 'js'
   - 'less'
-  - 'preprocess'
+  - 'preprocess:dev'
   - 'connect'
   - 'watch'
 
@@ -16,5 +16,7 @@ js:
 build:
   - 'clean'
   - 'js'
+  - 'requirejs'
   - 'less'
-  - 'preprocess'
+  - 'copy:prod'
+  - 'preprocess:prod'

@@ -12,7 +12,7 @@ module.exports = function (grunt, options) {
 
     index: {
       files: ['app/index.html'],
-      tasks: ['preprocess:index']
+      tasks: ['preprocess:dev']
     },
 
     less: {

@@ -4,7 +4,7 @@ module.exports = function (grunt, options) {
 
     all: {
       files: {
-        'dist/stylesheets/index.css': 'app/less/index.less'
+        'dist/stylesheets/style.css': 'app/less/style.less'
       }
     }
 
