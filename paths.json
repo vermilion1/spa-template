@@ -1,0 +1,35 @@
+{
+  "clean": {
+    "src": ["./dist"]
+  },
+  "connect": {
+    "root": ["./dist", "./app"]
+  },
+  "jshint": {
+    "src": [
+      "./gulpfile.js",
+      "./app/js/src/**/*.js",
+      "./app/js/tests/**/*.js"
+    ]
+  },
+  "js": {
+    "src": ["./app/js/src/app.js"],
+    "dest": "./dist/js"
+  },
+  "less": {
+    "watch": ["./app/less/**/*.less"],
+    "src": ["./app/less/**/*.less", "!./app/less/**/_*.less"],
+    "dest": "./dist/stylesheets"
+  },
+  "index": {
+    "src": ["./app/index.html"],
+    "dest": "./dist"
+  },
+  "images": {
+    "src": ["./app/images/**/*"],
+    "dest": "./dist/images"
+  },
+  "watch": {
+    "livereload": ["./dist"]
+  }
+}
