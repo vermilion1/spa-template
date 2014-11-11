@@ -1,4 +1,6 @@
-module.exports = function (grunt, options) {
+'use strict';
+
+module.exports = function () {
 
   return {
 
@@ -9,8 +11,8 @@ module.exports = function (grunt, options) {
     all: [
       'Gruntfile.js',
       'grunt/*.js',
-      'app/js/src/*.js',
-      'app/js/tests/*.js'
+      'app/js/src/**/*.js',
+      'app/js/tests/**/*.js'
     ]
 
   };

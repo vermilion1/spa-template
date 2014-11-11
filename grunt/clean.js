@@ -1,4 +1,6 @@
-module.exports = function (grunt, options) {
+'use strict';
+
+module.exports = function () {
 
   return [
     'dist',

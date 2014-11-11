@@ -1,10 +1,12 @@
-module.exports = function (grunt, options) {
+'use strict';
+
+module.exports = function () {
 
   return {
 
     js: {
       files: ['<%= jshint.all %>'],
-      tasks: ['jshint'],
+      tasks: ['jshint', 'browserify'],
       options: {
         interrupt: true
       }
@@ -12,17 +14,24 @@ module.exports = function (grunt, options) {
 
     index: {
       files: ['app/index.html'],
-      tasks: ['preprocess:dev']
+      tasks: ['preprocess:dev'],
+      options: {
+        interrupt: true
+      }
     },
 
     less: {
       files: ['app/less/**/*.less'],
-      tasks: ['less']
+      tasks: ['less'],
+      options: {
+        interrupt: true
+      }
     },
 
     livereload: {
       files: ['dist/index.html', 'dist/stylesheets/*.css'],
       options: {
+        interrupt: true,
         livereload: true
       }
     }

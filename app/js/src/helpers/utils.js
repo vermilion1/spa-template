@@ -1,9 +1,7 @@
-define([], function () {
+'use strict';
 
-  return {
+var utils = {
+  noop: function () {}
+};
 
-    noop: function () {}
-
-  };
-
-});
+module.exports = utils;

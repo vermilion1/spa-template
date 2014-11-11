@@ -4,6 +4,7 @@ default:
 dev:
   - 'clean'
   - 'jshint'
+  - 'browserify'
   - 'less'
   - 'preprocess:dev'
   - 'htmlmin'
@@ -13,7 +14,7 @@ dev:
 build:
   - 'clean'
   - 'jshint'
-  - 'requirejs'
+  - 'browserify'
   - 'less'
   - 'copy:prod'
   - 'preprocess:prod'

@@ -1,11 +1,6 @@
-require([
-  'helpers/utils',
-  'jquery'
-],
+'use strict';
 
-function (utils, $) {
+var $ = require('../vendor/jquery');
 
-  $('[data-loading]').addClass('loading--finished');
-  $('[data-main]').show();
-
-});
+$('[data-loading]').addClass('loading--finished');
+$('[data-main]').show();
