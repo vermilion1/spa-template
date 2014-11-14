@@ -3,7 +3,7 @@
     "src": ["./dist"]
   },
   "connect": {
-    "root": ["./dist", "./app"]
+    "root": ["./dist"]
   },
   "jshint": {
     "src": [
@@ -31,6 +31,6 @@
     "dest": "./dist/images"
   },
   "watch": {
-    "livereload": ["./dist"]
+    "livereload": ["./dist/**/*"]
   }
 }
