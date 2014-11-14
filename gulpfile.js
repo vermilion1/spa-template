@@ -30,12 +30,14 @@ gulp.task('jshint', function() {
 
 gulp.task('less', function() {
   gulp.src(paths.less.src)
+    .pipe(plugins.plumber())
     .pipe(plugins.less())
     .pipe(gulp.dest(paths.less.dest));
 });
 
 gulp.task('js', function() {
   gulp.src(paths.js.src)
+    .pipe(plugins.plumber())
     .pipe(plugins.browserify())
     .pipe(gulp.dest(paths.js.dest));
 });
@@ -61,11 +63,9 @@ gulp.task('default', ['clean'], function() {
 });
 
 gulp.task('watch', ['connect'],  function() {
-  // TODO: Disable breaking connect on any error (e.g. less task)
-
   gulp.watch(paths.less.watch, ['less']);
-  //gulp.watch(paths.watch.js, ['js']);
   gulp.watch(paths.index.src, ['index']);
+  gulp.watch(paths.js.watch, ['js']);
   gulp.watch(paths.jshint.src, ['jshint']);
   gulp.watch(paths.images.src, ['images']);
   gulp.watch(paths.watch.livereload).on('change', plugins.livereload.changed);

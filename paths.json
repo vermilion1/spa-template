@@ -13,6 +13,7 @@
     ]
   },
   "js": {
+    "watch": ["./app/js/src/**/*.js"],
     "src": ["./app/js/src/app.js"],
     "dest": "./dist/js"
   },
