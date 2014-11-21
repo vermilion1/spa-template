@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="description" content="<!-- @echo description -->" />
   <title><!-- @echo title --></title>
-  <!-- @ifdef dev -->
+  <!-- @if env="development" -->
   <link rel="stylesheet" href="stylesheets/loading.css" />
   <!-- @endif -->
-  <!-- @ifndef dev -->
+  <!-- @if env="production" -->
   <style>
     <!-- @include ../dist/stylesheets/loading.css -->
   </style>

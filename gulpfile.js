@@ -5,6 +5,9 @@ var util = require('util');
 var extend = util._extend;
 var paths = require('./paths');
 var pkg = require('./package');
+var args = require('yargs').argv;
+var env = args.env || 'production';
+var isDev = env === 'development';
 var plugins = extend(require('gulp-load-plugins')(), {
   sequence: require('run-sequence'),
   del: require('del')
@@ -12,14 +15,6 @@ var plugins = extend(require('gulp-load-plugins')(), {
 
 gulp.task('clean', function(cb) {
   return plugins.del(paths.clean.src, cb);
-});
-
-gulp.task('connect', function() {
-  return plugins.connect.server({
-    root: paths.connect.root,
-    port: 9001,
-    livereload: true
-  });
 });
 
 gulp.task('jshint', function() {
@@ -33,7 +28,7 @@ gulp.task('less', function() {
     .pipe(plugins.plumber())
     .pipe(plugins.less())
     .pipe(gulp.dest(paths.less.dest))
-    .pipe(plugins.connect.reload());
+    .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
 gulp.task('js', function() {
@@ -44,39 +39,30 @@ gulp.task('js', function() {
 });
 
 gulp.task('index', function() {
-  // TODO: Add {dev: true}
-  // http://smm.zoomquiet.io/data/20131229163601/index.html#gulpenv + scripts property of package.json
-
-  console.log(arguments);
-
   return gulp.src(paths.index.src)
-    .pipe(plugins.preprocess({context: {title: pkg.title, description: pkg.description}}))
+    .pipe(plugins.preprocess({context: {title: pkg.title, description: pkg.description, env: env}}))
     .pipe(gulp.dest(paths.index.dest))
-    .pipe(plugins.connect.reload());
+    .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
 gulp.task('images', function() {
   return gulp.src(paths.images.src)
-    .pipe(gulp.dest(paths.images.dest));
+    .pipe(gulp.dest(paths.images.dest))
+    .pipe(plugins['if'](isDev, plugins.livereload()));
+});
+
+gulp.task('default', ['build'], function () {
+  gulp.start(['watch']);
 });
 
 gulp.task('build', ['clean'], function () {
   plugins.sequence(['jshint', 'js', 'less', 'images'], ['index']);
 });
 
-gulp.task('dev', ['build'], function () {
-  gulp.start(['watch']);
-});
-
-gulp.task('watch', ['connect'],  function() {
-  // TODO: resolve livereload + connect issue
-
+gulp.task('watch', function() {
   gulp.watch(paths.less.watch, ['less']);
   gulp.watch(paths.index.src, ['index']);
   gulp.watch(paths.js.watch, ['js']);
   gulp.watch(paths.jshint.src, ['jshint']);
   gulp.watch(paths.images.src, ['images']);
-  gulp.watch(paths.watch.livereload).on('change', plugins.livereload.changed);
-
-  plugins.livereload.listen();
 });

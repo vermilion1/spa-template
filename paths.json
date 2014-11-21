@@ -29,8 +29,5 @@
   "images": {
     "src": ["./app/images/**/*"],
     "dest": "./dist/images"
-  },
-  "watch": {
-    "livereload": ["./dist/**/*"]
   }
 }
