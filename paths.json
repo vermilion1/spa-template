@@ -12,10 +12,18 @@
       "./app/js/tests/**/*.js"
     ]
   },
-  "js": {
+  "jsApp": {
     "watch": ["./app/js/src/**/*.js"],
     "src": ["./app/js/src/app.js"],
     "dest": "./dist/js"
+  },
+  "jsVendor": {
+    "watch": ["./app/js/vendor/*.js"],
+    "src": "./app/js/src/vendor.js",
+    "dest": "./dist/js",
+    "require": [
+      "../vendor/jquery"
+    ]
   },
   "less": {
     "watch": ["./app/less/**/*.less"],

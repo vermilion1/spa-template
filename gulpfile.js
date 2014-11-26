@@ -1,5 +1,3 @@
-'use strict';
-
 var gulp = require('gulp');
 var util = require('util');
 var extend = util._extend;
@@ -31,11 +29,23 @@ gulp.task('less', function() {
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
-gulp.task('js', function() {
-  return gulp.src(paths.js.src)
+gulp.task('js:app', function() {
+  return gulp.src(paths.jsApp.src)
     .pipe(plugins.plumber())
+    .pipe(plugins.browserify({external: paths.jsVendor.require}))
+    .pipe(plugins.traceur({modules: 'commonjs'}))
+    .pipe(gulp.dest(paths.jsApp.dest));
+});
+
+gulp.task('js:vendor', function() {
+  return gulp.src(paths.jsVendor.src)
     .pipe(plugins.browserify())
-    .pipe(gulp.dest(paths.js.dest));
+    .on('prebundle', function(bundle) {
+        paths.jsVendor.require.forEach(function(src) {
+          bundle.require(src);
+        });
+    })
+    .pipe(gulp.dest(paths.jsVendor.dest));
 });
 
 gulp.task('index', function() {
@@ -56,13 +66,14 @@ gulp.task('default', ['build'], function () {
 });
 
 gulp.task('build', ['clean'], function () {
-  plugins.sequence(['jshint', 'js', 'less', 'images'], ['index']);
+  plugins.sequence(['jshint', 'js:app', 'js:vendor', 'less', 'images'], ['index']);
 });
 
 gulp.task('watch', function() {
   gulp.watch(paths.less.watch, ['less']);
   gulp.watch(paths.index.src, ['index']);
-  gulp.watch(paths.js.watch, ['js']);
+  gulp.watch(paths.jsApp.watch, ['js:app']);
+  gulp.watch(paths.jsVendor.watch, ['js:vendor']);
   gulp.watch(paths.jshint.src, ['jshint']);
   gulp.watch(paths.images.src, ['images']);
 });
