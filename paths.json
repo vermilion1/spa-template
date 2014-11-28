@@ -30,8 +30,8 @@
     "src": ["./app/less/**/*.less", "!./app/less/**/_*.less"],
     "dest": "./dist/stylesheets"
   },
-  "index": {
-    "src": ["./app/index.html"],
+  "html": {
+    "src": ["./app/*.html"],
     "dest": "./dist"
   },
   "images": {

@@ -1,0 +1,30 @@
+// CSS naming convention
+// ---------------------
+// %element-name
+// %element-name--modifier-name
+// %element-name__sub-object
+// %element-name__sub-object--modifier-name
+
+@import "_reset";
+@import "_elements";
+@import "_helpers";
+@import "_config";
+@import "_base";
+
+@login-width: 400px;
+@login-height: 200px;
+
+body {
+  background: #eee;
+}
+
+.login {
+  .rounded(@border-radius);
+  .stretch(0, 0, 0, 0);
+
+  max-width: @login-width;
+  max-height: @login-height;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+}

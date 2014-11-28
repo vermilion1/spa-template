@@ -48,10 +48,10 @@ gulp.task('js:vendor', function() {
     .pipe(gulp.dest(paths.jsVendor.dest));
 });
 
-gulp.task('index', function() {
-  return gulp.src(paths.index.src)
+gulp.task('html', function() {
+  return gulp.src(paths.html.src)
     .pipe(plugins.preprocess({context: {title: pkg.title, description: pkg.description, env: env}}))
-    .pipe(gulp.dest(paths.index.dest))
+    .pipe(gulp.dest(paths.html.dest))
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
@@ -66,12 +66,12 @@ gulp.task('default', ['build'], function () {
 });
 
 gulp.task('build', ['clean'], function () {
-  plugins.sequence(['jshint', 'js:app', 'js:vendor', 'less', 'images'], ['index']);
+  plugins.sequence(['jshint', 'js:app', 'js:vendor', 'less', 'images'], ['html']);
 });
 
 gulp.task('watch', function() {
   gulp.watch(paths.less.watch, ['less']);
-  gulp.watch(paths.index.src, ['index']);
+  gulp.watch(paths.html.src, ['html']);
   gulp.watch(paths.jsApp.watch, ['js:app']);
   gulp.watch(paths.jsVendor.watch, ['js:vendor']);
   gulp.watch(paths.jshint.src, ['jshint']);
