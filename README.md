@@ -1,6 +1,6 @@
 ####Once cloned
-    sudo npm install
     sudo npm install -g bower
+    sudo npm install
     bower install
 
 ####For development

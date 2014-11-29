@@ -5,6 +5,7 @@ var pkg = require('./package');
 var args = require('yargs').argv;
 var env = args.env || 'production';
 var isDev = env === 'development';
+var isProd = !isDev;
 var each = _.each.bind(_);
 var extend = _.extend.bind(_);
 var plugins = extend(require('gulp-load-plugins')(), {
@@ -26,6 +27,7 @@ gulp.task('less', function() {
   return gulp.src(paths.less.src)
     .pipe(plugins.plumber())
     .pipe(plugins.less())
+    .pipe(plugins['if'](isProd, plugins.minifyCss()))
     .pipe(gulp.dest(paths.less.dest))
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
@@ -43,6 +45,7 @@ gulp.task('js:app', function() {
       });
     })
     .pipe(plugins.traceur({modules: 'commonjs'}))
+    .pipe(plugins['if'](isProd, plugins.uglify()))
     .pipe(gulp.dest(paths.jsApp.dest));
 });
 
@@ -64,6 +67,7 @@ gulp.task('js:vendor:browserify', function() {
 gulp.task('js:vendor:concat', function() {
   return gulp.src([plugins.traceur.RUNTIME_PATH, paths.jsVendorConcat.src])
     .pipe(plugins.concat(paths.jsVendorConcat.name))
+    .pipe(plugins['if'](isProd, plugins.uglify()))
     .pipe(gulp.dest(paths.jsVendorConcat.dest));
 });
 
@@ -86,6 +90,7 @@ gulp.task('html:min', function() {
 
 gulp.task('images', function() {
   return gulp.src(paths.images.src)
+    .pipe(plugins['if'](isProd, plugins.imagemin({progressive: true, interlaced: true})))
     .pipe(gulp.dest(paths.images.dest))
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
