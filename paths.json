@@ -42,6 +42,10 @@
     "src": ["./app/*.html"],
     "dest": "./dist"
   },
+  "htmlMin": {
+    "src": ["./dist/*.html"],
+    "dest": "./dist"
+  },
   "images": {
     "src": ["./app/images/**/*"],
     "dest": "./dist/images"

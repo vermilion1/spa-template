@@ -68,10 +68,20 @@ gulp.task('js:vendor:concat', function() {
 });
 
 gulp.task('html', function() {
+  return plugins.sequence(['html:compile'], ['html:min']);
+});
+
+gulp.task('html:compile', function() {
   return gulp.src(paths.html.src)
     .pipe(plugins.preprocess({context: {title: pkg.title, description: pkg.description, env: env}}))
     .pipe(gulp.dest(paths.html.dest))
     .pipe(plugins['if'](isDev, plugins.livereload()));
+});
+
+gulp.task('html:min', function() {
+  return gulp.src(paths.htmlMin.src)
+    .pipe(plugins.htmlmin({collapseWhitespace: true, minifyJS: true, minifyCSS: true}))
+    .pipe(gulp.dest(paths.htmlMin.dest));
 });
 
 gulp.task('images', function() {
