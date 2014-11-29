@@ -25,6 +25,11 @@
       "../vendor/jquery"
     ]
   },
+  "jsVendorConcat": {
+    "src": "./dist/js/vendor.js",
+    "name": "vendor.js",
+    "dest": "./dist/js"
+  },
   "less": {
     "watch": ["./app/less/**/*.less"],
     "src": ["./app/less/**/*.less", "!./app/less/**/_*.less"],

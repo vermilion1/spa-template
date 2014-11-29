@@ -1,5 +1,7 @@
-var utils = {
-  noop: function () {}
-};
+class Utils {
 
-module.exports = utils;
+  noop() {}
+
+}
+
+module.exports = new Utils();

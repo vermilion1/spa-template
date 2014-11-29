@@ -38,14 +38,24 @@ gulp.task('js:app', function() {
 });
 
 gulp.task('js:vendor', function() {
+  return plugins.sequence(['js:vendor:browserify'], ['js:vendor:concat']);
+});
+
+gulp.task('js:vendor:browserify', function() {
   return gulp.src(paths.jsVendor.src)
     .pipe(plugins.browserify())
     .on('prebundle', function(bundle) {
-        paths.jsVendor.require.forEach(function(src) {
-          bundle.require(src);
-        });
+      paths.jsVendor.require.forEach(function(src) {
+        bundle.require(src);
+      });
     })
     .pipe(gulp.dest(paths.jsVendor.dest));
+});
+
+gulp.task('js:vendor:concat', function() {
+  return gulp.src([plugins.traceur.RUNTIME_PATH, paths.jsVendorConcat.src])
+    .pipe(plugins.concat(paths.jsVendorConcat.name))
+    .pipe(gulp.dest(paths.jsVendorConcat.dest));
 });
 
 gulp.task('html', function() {

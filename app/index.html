@@ -6,13 +6,14 @@
   <title><!-- @echo title --></title>
   <!-- @if env="development" -->
   <link rel="stylesheet" href="stylesheets/loading.css" />
+  <script src="../app/js/vendor/head.load.js"></script>
   <!-- @endif -->
   <!-- @if env="production" -->
   <style>
     <!-- @include ../dist/stylesheets/loading.css -->
+    <!-- @include js/vendor/head.load.js -->
   </style>
   <!-- @endif -->
-  <link rel="stylesheet" href="stylesheets/style.css" />
 </head>
 <body>
 
@@ -25,12 +26,11 @@
   <script>
     var startTime = new Date();
 
-    // TODO:
-    // Load resources using JS to avoid page blocking
+    head.load('stylesheets/style.css', {vendor: 'js/vendor.js'});
+    head.ready('vendor', function() {
+      head.load('js/app.js');
+    });
   </script>
-
-  <script src="js/vendor.js"></script>
-  <script src="js/app.js"></script>
 
 </body>
 </html>
