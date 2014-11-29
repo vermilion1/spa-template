@@ -21,7 +21,7 @@
     }
   },
   "jsVendor": {
-    "watch": ["./app/js/vendor/*.js"],
+    "watch": ["./app/js/vendor/*.js", "./bower_components/**/*.js"],
     "src": "./app/js/src/vendor.js",
     "dest": "./dist/js",
     "require": {

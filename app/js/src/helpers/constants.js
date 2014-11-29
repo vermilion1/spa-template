@@ -1,5 +1,7 @@
 const MIN_APP_LOAD_TIME = 500;
+const PIXEL_SRC = 'data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 
 module.exports = {
-  MIN_APP_LOAD_TIME
+  MIN_APP_LOAD_TIME,
+  PIXEL_SRC
 };
