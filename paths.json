@@ -15,15 +15,18 @@
   "jsApp": {
     "watch": ["./app/js/src/**/*.js"],
     "src": ["./app/js/src/app.js"],
-    "dest": "./dist/js"
+    "dest": "./dist/js",
+    "aliases": {
+      "constants": "./helpers/constants"
+    }
   },
   "jsVendor": {
     "watch": ["./app/js/vendor/*.js"],
     "src": "./app/js/src/vendor.js",
     "dest": "./dist/js",
-    "require": [
-      "../vendor/jquery"
-    ]
+    "require": {
+      "$": "../vendor/jquery"
+    }
   },
   "jsVendorConcat": {
     "src": "./dist/js/vendor.js",

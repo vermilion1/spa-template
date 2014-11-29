@@ -1,11 +1,12 @@
 var gulp = require('gulp');
-var util = require('util');
-var extend = util._extend;
+var _ = require('underscore');
 var paths = require('./paths');
 var pkg = require('./package');
 var args = require('yargs').argv;
 var env = args.env || 'production';
 var isDev = env === 'development';
+var each = _.each.bind(_);
+var extend = _.extend.bind(_);
 var plugins = extend(require('gulp-load-plugins')(), {
   sequence: require('run-sequence'),
   del: require('del')
@@ -32,7 +33,15 @@ gulp.task('less', function() {
 gulp.task('js:app', function() {
   return gulp.src(paths.jsApp.src)
     .pipe(plugins.plumber())
-    .pipe(plugins.browserify({external: paths.jsVendor.require}))
+    .pipe(plugins.browserify())
+    .on('prebundle', function(bundle) {
+      each(paths.jsApp.aliases, function (path, expose) {
+        bundle.require(path, {expose: expose});
+      });
+      each(paths.jsVendor.require, function (path, expose) {
+        bundle.external(path, {expose: expose});
+      });
+    })
     .pipe(plugins.traceur({modules: 'commonjs'}))
     .pipe(gulp.dest(paths.jsApp.dest));
 });
@@ -45,8 +54,8 @@ gulp.task('js:vendor:browserify', function() {
   return gulp.src(paths.jsVendor.src)
     .pipe(plugins.browserify())
     .on('prebundle', function(bundle) {
-      paths.jsVendor.require.forEach(function(src) {
-        bundle.require(src);
+      each(paths.jsVendor.require, function (path, expose) {
+        bundle.require(path, {expose: expose});
       });
     })
     .pipe(gulp.dest(paths.jsVendor.dest));

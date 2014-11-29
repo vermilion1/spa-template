@@ -1,5 +1,5 @@
-var $ = require('../vendor/jquery');
-var constants = require('./helpers/constants');
+var $ = require('$');
+var constants = require('constants');
 
 window.head.ready(function () {
 
