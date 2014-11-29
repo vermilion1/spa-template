@@ -25,7 +25,7 @@
     "src": "./app/js/src/vendor.js",
     "dest": "./dist/js",
     "require": {
-      "$": "../vendor/jquery"
+      "$": "../../../bower_components/jquery/dist/jquery.js"
     }
   },
   "jsVendorConcat": {
