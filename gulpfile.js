@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var _ = require('underscore');
-var paths = require('./paths');
+var config = require('./config');
 var pkg = require('./package');
 var args = require('yargs').argv;
 var env = args.env || 'production';
@@ -14,39 +14,39 @@ var plugins = extend(require('gulp-load-plugins')(), {
 });
 
 gulp.task('clean', function(cb) {
-  return plugins.del(paths.clean.src, cb);
+  return plugins.del(config.clean.src, cb);
 });
 
 gulp.task('jshint', function() {
-  return gulp.src(paths.jshint.src)
+  return gulp.src(config.jshint.src)
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('less', function() {
-  return gulp.src(paths.less.src)
+  return gulp.src(config.less.src)
     .pipe(plugins.plumber())
     .pipe(plugins.less())
     .pipe(plugins['if'](isProd, plugins.minifyCss()))
-    .pipe(gulp.dest(paths.less.dest))
+    .pipe(gulp.dest(config.less.dest))
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
 gulp.task('js:app', function() {
-  return gulp.src(paths.jsApp.src)
+  return gulp.src(config.jsApp.src)
     .pipe(plugins.plumber())
     .pipe(plugins.browserify())
     .on('prebundle', function(bundle) {
-      each(paths.jsApp.aliases, function (path, expose) {
+      each(config.jsApp.aliases, function (path, expose) {
         bundle.require(path, {expose: expose});
       });
-      each(paths.jsVendor.require, function (path, expose) {
+      each(config.jsVendor.require, function (path, expose) {
         bundle.external(path, {expose: expose});
       });
     })
     .pipe(plugins.traceur({modules: 'commonjs'}))
     .pipe(plugins['if'](isProd, plugins.uglify()))
-    .pipe(gulp.dest(paths.jsApp.dest));
+    .pipe(gulp.dest(config.jsApp.dest));
 });
 
 gulp.task('js:vendor', function() {
@@ -54,21 +54,21 @@ gulp.task('js:vendor', function() {
 });
 
 gulp.task('js:vendor:browserify', function() {
-  return gulp.src(paths.jsVendor.src)
+  return gulp.src(config.jsVendor.src)
     .pipe(plugins.browserify())
     .on('prebundle', function(bundle) {
-      each(paths.jsVendor.require, function (path, expose) {
+      each(config.jsVendor.require, function (path, expose) {
         bundle.require(path, {expose: expose});
       });
     })
-    .pipe(gulp.dest(paths.jsVendor.dest));
+    .pipe(gulp.dest(config.jsVendor.dest));
 });
 
 gulp.task('js:vendor:concat', function() {
-  return gulp.src([plugins.traceur.RUNTIME_PATH, paths.jsVendorConcat.src])
-    .pipe(plugins.concat(paths.jsVendorConcat.name))
+  return gulp.src([plugins.traceur.RUNTIME_PATH, config.jsVendorConcat.src])
+    .pipe(plugins.concat(config.jsVendorConcat.name))
     .pipe(plugins['if'](isProd, plugins.uglify()))
-    .pipe(gulp.dest(paths.jsVendorConcat.dest));
+    .pipe(gulp.dest(config.jsVendorConcat.dest));
 });
 
 gulp.task('html', function() {
@@ -76,27 +76,27 @@ gulp.task('html', function() {
 });
 
 gulp.task('html:compile', function() {
-  return gulp.src(paths.html.src)
+  return gulp.src(config.html.src)
     .pipe(plugins.preprocess({context: {title: pkg.title, description: pkg.description, env: env}}))
-    .pipe(gulp.dest(paths.html.dest))
+    .pipe(gulp.dest(config.html.dest))
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
 gulp.task('html:min', function() {
-  return gulp.src(paths.htmlMin.src)
+  return gulp.src(config.htmlMin.src)
     .pipe(plugins.htmlmin({collapseWhitespace: true, minifyJS: true, minifyCSS: true}))
-    .pipe(gulp.dest(paths.htmlMin.dest));
+    .pipe(gulp.dest(config.htmlMin.dest));
 });
 
 gulp.task('images', function() {
-  return gulp.src(paths.images.src)
+  return gulp.src(config.images.src)
     .pipe(plugins['if'](isProd, plugins.imagemin({progressive: true, interlaced: true})))
-    .pipe(gulp.dest(paths.images.dest))
+    .pipe(gulp.dest(config.images.dest))
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
 gulp.task('default', ['build'], function () {
-  gulp.start(['watch']);
+  gulp.start('watch');
 });
 
 gulp.task('build', ['clean'], function () {
@@ -104,10 +104,10 @@ gulp.task('build', ['clean'], function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(paths.less.watch, ['less']);
-  gulp.watch(paths.html.src, ['html']);
-  gulp.watch(paths.jsApp.watch, ['js:app']);
-  gulp.watch(paths.jsVendor.watch, ['js:vendor']);
-  gulp.watch(paths.jshint.src, ['jshint']);
-  gulp.watch(paths.images.src, ['images']);
+  gulp.watch(config.less.watch, ['less']);
+  gulp.watch(config.html.src, ['html']);
+  gulp.watch(config.jsApp.watch, ['js:app']);
+  gulp.watch(config.jsVendor.watch, ['js:vendor']);
+  gulp.watch(config.jshint.src, ['jshint']);
+  gulp.watch(config.images.src, ['images']);
 });

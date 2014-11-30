@@ -17,7 +17,9 @@
     "src": ["./app/js/src/index.js"],
     "dest": "./dist/js",
     "aliases": {
-      "constants": "./shared/constants"
+      "constants": "./helpers/constants",
+      "mediator": "./helpers/mediator",
+      "utils": "./helpers/utils"
     }
   },
   "jsVendor": {
@@ -53,5 +55,8 @@
   "images": {
     "src": ["./app/images/**/*"],
     "dest": "./dist/images"
+  },
+  "server": {
+    "port": 9001
   }
 }
