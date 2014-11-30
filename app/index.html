@@ -19,11 +19,16 @@
 </head>
 <body>
 
-  <img data-loading class="loading" src="images/logo.png" alt="Loading..." />
-
-  <div data-main style="display: none">
-    <button type="button" class="button button--small">Button</button>
+  <div class="loading" data-loading>
+    <img class="loading__logo" src="images/logo.png" alt="Loading..." />
   </div>
+
+  <div data-navigation>
+    <a href="#" class="button button--small">Home</a>
+    <a href="#404" class="button button--small">404</a>
+  </div>
+
+  <div data-view></div>
 
   <script>
     head.load('stylesheets/style.css', {vendor: 'js/vendor.js'});

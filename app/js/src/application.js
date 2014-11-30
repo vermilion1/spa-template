@@ -3,8 +3,8 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 var Marionette = require('marionette');
 
-var Index = require('./pages/index/index');
-var NotFound = require('./pages/not-found/index');
+var Index = require('./screens/index');
+var NotFound = require('./screens/not-found');
 
 var Application = Marionette.Application.extend({
 
@@ -13,12 +13,12 @@ var Application = Marionette.Application.extend({
   },
 
   onBeforeStart() {
-    this.definePages();
+    this.defineScreens();
     this.startHistory();
     this.hideLoading();
   },
 
-  definePages() {
+  defineScreens() {
     new NotFound({router: true});
     new Index({router: true});
   },
@@ -32,8 +32,9 @@ var Application = Marionette.Application.extend({
   },
 
   hideLoading() {
-    $('[data-loading]').addClass('loading--finished');
-    $('[data-main]').show();
+    $('[data-loading]').fadeOut(600, function () {
+      $(this).remove();
+    });
   }
 
 });

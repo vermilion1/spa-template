@@ -1,13 +1,15 @@
-.loading {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
+@import "_helpers";
 
-  &--finished {
-    transition: opacity 1s ease;
-    opacity: 0;
+.loading {
+  position: fixed;
+  background: #fff;
+
+  &,
+  &__logo {
+    .stretch(0, 0, 0, 0);
+  }
+
+  &__logo {
+    margin: auto;
   }
 }
