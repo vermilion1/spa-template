@@ -14,10 +14,10 @@
   },
   "jsApp": {
     "watch": ["./app/js/src/**/*.js"],
-    "src": ["./app/js/src/app.js"],
+    "src": ["./app/js/src/index.js"],
     "dest": "./dist/js",
     "aliases": {
-      "constants": "./helpers/constants"
+      "constants": "./shared/constants"
     }
   },
   "jsVendor": {
@@ -25,7 +25,11 @@
     "src": "./app/js/src/vendor.js",
     "dest": "./dist/js",
     "require": {
-      "$": "../../../bower_components/jquery/dist/jquery.js"
+      "jquery": "../../../bower_components/jquery/dist/jquery.js",
+      "underscore": "../../../bower_components/underscore/underscore.js",
+      "backbone": "../../../bower_components/backbone/backbone.js",
+      "controller": "../../../bower_components/backbone.controller/backbone.controller.js",
+      "marionette": "../../../bower_components/marionette/lib/backbone.marionette.js"
     }
   },
   "jsVendorConcat": {

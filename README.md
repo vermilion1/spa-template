@@ -16,6 +16,7 @@ Using:
 
 ####For development
     npm start
+    python -m SimpleHTTPServer
 
 ####For release
     npm run build
