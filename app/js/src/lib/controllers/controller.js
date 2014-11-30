@@ -26,7 +26,7 @@ var Ctrl = Controller.extend({
    *   - render it if possible
    *   - invoke post-action method
    */
-  start() {
+  start: function () {
     this.createLayout();
     this.preventRender || this.renderLayout();
     this.onAfterStart();
@@ -35,20 +35,20 @@ var Ctrl = Controller.extend({
   /**
    * Callback that will be executed after starting the controller.
    */
-  onAfterStart() {},
+  onAfterStart: function () {},
 
   /**
    * Handle controller remove.
    * Here we have to care about layout listeners.
    */
-  remove() {
+  remove: function () {
     this.destroyLayout();
   },
 
   /**
    * Destroy the layout if possible.
    */
-  destroyLayout() {
+  destroyLayout: function () {
     if (this.layout) {
       this.layout.destroy();
       this.layout = null;
@@ -58,7 +58,7 @@ var Ctrl = Controller.extend({
   /**
    * Create the layout if possible.
    */
-  createLayout() {
+  createLayout: function () {
     var Layout = this.Layout;
     if (Layout) {
       this.layout = new Layout();
@@ -68,7 +68,7 @@ var Ctrl = Controller.extend({
   /**
    * Render the layout if possible.
    */
-  renderLayout() {
+  renderLayout: function () {
     this.layout && this.layout.render();
   }
 

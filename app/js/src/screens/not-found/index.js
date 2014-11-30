@@ -8,8 +8,8 @@ var Ctrl = BaseController.extend({
     '*any': 'start'
   },
 
-  onAfterStart() {
-    console.log('manage not-found layout here', this.layout);
+  onAfterStart: function () {
+    console.log('manage not-found layout here');
   }
 
 });

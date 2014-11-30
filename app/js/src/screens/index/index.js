@@ -8,8 +8,8 @@ var Ctrl = BaseController.extend({
     '': 'start'
   },
 
-  onAfterStart() {
-    console.log('manage index layout here', this.layout);
+  onAfterStart: function () {
+    console.log('manage index layout here');
   }
 
 });

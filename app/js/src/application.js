@@ -8,30 +8,30 @@ var NotFound = require('./screens/not-found');
 
 var Application = Marionette.Application.extend({
 
-  initialize() {
+  initialize: function () {
     this.addLoadListener();
   },
 
-  onBeforeStart() {
+  onBeforeStart: function () {
     this.defineScreens();
     this.startHistory();
     this.hideLoading();
   },
 
-  defineScreens() {
+  defineScreens: function () {
     new NotFound({router: true});
     new Index({router: true});
   },
 
-  startHistory() {
+  startHistory: function () {
     Backbone.history.start();
   },
 
-  addLoadListener() {
+  addLoadListener: function () {
     window.head.ready(_.bind(this.start, this));
   },
 
-  hideLoading() {
+  hideLoading: function () {
     $('[data-loading]').fadeOut(600, function () {
       $(this).remove();
     });

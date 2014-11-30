@@ -8,7 +8,7 @@ _.extend(proto, {
    * Load view's template.
    * @returns {string}
    */
-  loadTemplate() {
+  loadTemplate: function () {
     return proto.loadTemplate.apply(this, arguments);
   }
 

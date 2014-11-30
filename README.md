@@ -35,3 +35,9 @@ And application will be available at http://localhost:9001/dist
 
 ####For release
     npm run build
+
+
+####TODO
+
+ - Use RequireJS with its paths (aliases)
+ - Remove Traceur
