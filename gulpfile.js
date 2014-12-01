@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var _ = require('underscore');
 var config = require('./config');
 var pkg = require('./package');
+var expose = require('./build/expose');
 var args = require('yargs').argv;
 var env = args.env || 'production';
 var isDev = env === 'development';
@@ -37,11 +38,14 @@ gulp.task('js:app', function() {
     .pipe(plugins.plumber())
     .pipe(plugins.browserify())
     .on('prebundle', function(bundle) {
-      each(config.jsApp.aliases, function (path, expose) {
-        bundle.require(path, {expose: expose});
+      each(expose.dir(config.jsApp.expose.directories, config.jsApp.expose.basePath), function (args) {
+        bundle.require.apply(bundle, args);
       });
-      each(config.jsVendor.require, function (path, expose) {
-        bundle.external(path, {expose: expose});
+      each(expose.file(config.jsApp.expose.files), function (args) {
+        bundle.require.apply(bundle, args);
+      });
+      each(expose.file(config.jsVendor.require), function (args) {
+        bundle.external.apply(bundle, args);
       });
     })
     .pipe(plugins.traceur({modules: 'commonjs'}))
@@ -57,8 +61,8 @@ gulp.task('js:vendor:browserify', function() {
   return gulp.src(config.jsVendor.src)
     .pipe(plugins.browserify())
     .on('prebundle', function(bundle) {
-      each(config.jsVendor.require, function (path, expose) {
-        bundle.require(path, {expose: expose});
+      each(expose.file(config.jsVendor.require), function (args) {
+        bundle.require.apply(bundle, args);
       });
     })
     .pipe(gulp.dest(config.jsVendor.dest));

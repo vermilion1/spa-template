@@ -1,4 +1,4 @@
-var BaseController = require('../../lib/controllers/controller');
+var BaseController = require('lib/controllers/controller');
 var Layout = require('./main/views/layout');
 var Ctrl = BaseController.extend({
 

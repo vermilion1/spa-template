@@ -16,10 +16,14 @@
     "watch": ["./app/js/src/**/*.js"],
     "src": ["./app/js/src/index.js"],
     "dest": "./dist/js",
-    "aliases": {
-      "constants": "./helpers/constants",
-      "mediator": "./helpers/mediator",
-      "utils": "./helpers/utils"
+    "expose": {
+      "basePath": "./app/js/src",
+      "directories": ["lib"],
+      "files": {
+        "constants": "./helpers/constants",
+        "mediator": "./helpers/mediator",
+        "utils": "./helpers/utils"
+      }
     }
   },
   "jsVendor": {
