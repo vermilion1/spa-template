@@ -8,8 +8,7 @@
   "jshint": {
     "src": [
       "./gulpfile.js",
-      "./app/src/**/*.js",
-      "./app/tests/**/*.js"
+      "./app/src/**/*.js"
     ]
   },
   "jsApp": {
@@ -20,6 +19,7 @@
       "basePath": "./app/src",
       "directories": ["lib"],
       "files": {
+        "screens": "../../screens",
         "constants": "./helpers/constants",
         "mediator": "./helpers/mediator",
         "utils": "./helpers/utils"
@@ -49,8 +49,8 @@
     "dest": "./dist/stylesheets"
   },
   "lessApp": {
-    "watch": ["./app/src/screens/**/*.less"],
-    "screens": "./app/src/screens",
+    "watch": ["./app/src/**/*.less"],
+    "app": "./app/src",
     "name": "app.css",
     "dest": "./dist/stylesheets"
   },

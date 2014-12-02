@@ -40,7 +40,7 @@ gulp.task('less:common', function() {
 });
 
 gulp.task('less:app', function() {
-  return gulp.src(less(screens, config.lessApp.screens))
+  return gulp.src(less(screens, config.lessApp.app))
     .pipe(plugins.plumber())
     .pipe(plugins.less())
     .pipe(plugins.concat(config.lessApp.name))
@@ -54,15 +54,10 @@ gulp.task('js:app', function() {
     .pipe(plugins.plumber())
     .pipe(plugins.browserify())
     .on('prebundle', function(bundle) {
-      each(expose.dir(config.jsApp.expose.directories, config.jsApp.expose.basePath), function (args) {
-        bundle.require.apply(bundle, args);
-      });
-      each(expose.file(config.jsApp.expose.files), function (args) {
-        bundle.require.apply(bundle, args);
-      });
-      each(expose.file(config.jsVendor.require), function (args) {
-        bundle.external.apply(bundle, args);
-      });
+      each(expose.screen(screens), expose.require(bundle));
+      each(expose.dir(config.jsApp.expose.directories, config.jsApp.expose.basePath), expose.require(bundle));
+      each(expose.file(config.jsApp.expose.files), expose.require(bundle));
+      each(expose.file(config.jsVendor.require), expose.external(bundle));
     })
     .pipe(plugins.traceur({modules: 'commonjs'}))
     .pipe(plugins['if'](isProd, plugins.uglify()))

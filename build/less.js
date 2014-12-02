@@ -1,12 +1,14 @@
 var _ = require('underscore');
-var glob = require('glob');
 var path = require('path');
 
 function less(dirs, basePath) {
-  var base = path.normalize(basePath + '/').replace(/\\/g, '/');
-  var pattern = base + '/+(' + dirs.join('|') + ')/**/*.less';
+  var createSource = function(dir) {
+    var normalized = path.normalize(basePath + '/' + dir);
+    var compatible = normalized.replace(/\\/g, '/');
+    return compatible + '/**/*.less';
+  };
 
-  return glob.sync(pattern);
+  return _.map(dirs, createSource);
 }
 
 module.exports = less;

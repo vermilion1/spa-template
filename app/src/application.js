@@ -2,9 +2,7 @@ var _ = require('underscore');
 var $ = require('jquery');
 var Backbone = require('backbone');
 var Marionette = require('marionette');
-
-var Index = require('./screens/index/index');
-var NotFound = require('./screens/not-found/index');
+var screens = require('screens');
 
 var Application = Marionette.Application.extend({
 
@@ -19,8 +17,10 @@ var Application = Marionette.Application.extend({
   },
 
   defineScreens: function () {
-    new NotFound({router: true});
-    new Index({router: true});
+    _.each(screens, function (screen) {
+      var Screen = require(screen);
+      new Screen({router: true});
+    });
   },
 
   startHistory: function () {

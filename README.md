@@ -40,7 +40,6 @@ And application will be available at http://localhost:9001/dist
 
 ####TODO
 
- - Use screens.json for JS initialization
  - Compile templates
  - Files structure
  - Remove Traceur (or not?)

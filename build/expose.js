@@ -2,6 +2,12 @@ var _ = require('underscore');
 var glob = require('glob');
 var path = require('path');
 
+function screen(screens) {
+  return _.map(screens, function (screen) {
+    return ['./' + screen, {expose: screen}];
+  });
+}
+
 function dir(dirs, basePath) {
   var base = path.normalize(basePath + '/').replace(/\\/g, '/');
   var pattern = base + '/+(' + dirs.join('|') + ')/**/*.js';
@@ -22,7 +28,24 @@ function file(files) {
   });
 }
 
+function withBundle(bundle, method) {
+  return function (args) {
+    bundle[method].apply(bundle, args);
+  }
+}
+
+function requireBundle(bundle) {
+  return withBundle(bundle, 'require');
+}
+
+function externalBundle(bundle) {
+  return withBundle(bundle, 'external');
+}
+
 module.exports = {
+  screen: screen,
   dir: dir,
-  file: file
+  file: file,
+  require: requireBundle,
+  external: externalBundle
 };
