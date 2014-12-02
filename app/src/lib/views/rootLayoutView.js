@@ -1,7 +1,10 @@
 var LayoutView = require('./layoutView');
-var RootLayoutView = LayoutView.extend({
 
-  el: '[data-view]',
+class RootLayoutView extends LayoutView {
+
+  get el () {
+    return '[data-view]';
+  }
 
   /**
    * @override
@@ -9,11 +12,11 @@ var RootLayoutView = LayoutView.extend({
    * We do not need to remove the layout container.
    * @returns {RootLayoutView}
    */
-  remove: function() {
+  remove () {
     this.stopListening();
     return this;
   }
 
-});
+}
 
 module.exports = RootLayoutView;

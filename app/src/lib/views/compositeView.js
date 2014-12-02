@@ -1,8 +1,9 @@
 var Marionette = require('marionette');
-var CompositeView = Marionette.CompositeView.extend({
+
+class CompositeView extends Marionette.CompositeView {
 
   //
 
-});
+}
 
 module.exports = CompositeView;

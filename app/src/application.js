@@ -4,39 +4,39 @@ var Backbone = require('backbone');
 var Marionette = require('marionette');
 var screens = require('screens');
 
-var Application = Marionette.Application.extend({
+class Application extends Marionette.Application {
 
-  initialize: function () {
+  initialize () {
     this.addLoadListener();
-  },
+  }
 
-  onBeforeStart: function () {
+  onBeforeStart () {
     this.defineScreens();
     this.startHistory();
     this.hideLoading();
-  },
+  }
 
-  defineScreens: function () {
-    _.each(screens, function (screen) {
+  defineScreens () {
+    _.each(screens, screen => {
       var Screen = require(screen);
       new Screen({router: true});
     });
-  },
+  }
 
-  startHistory: function () {
+  startHistory () {
     Backbone.history.start();
-  },
+  }
 
-  addLoadListener: function () {
-    window.head.ready(_.bind(this.start, this));
-  },
+  addLoadListener () {
+    window.head.ready(this.start.bind(this));
+  }
 
-  hideLoading: function () {
-    $('[data-loading]').fadeOut(600, function () {
-      $(this).remove();
+  hideLoading () {
+    $('[data-loading]').fadeOut(600, el => {
+      $(el).remove();
     });
   }
 
-});
+}
 
 module.exports = Application;

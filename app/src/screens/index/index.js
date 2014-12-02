@@ -1,17 +1,22 @@
 var BaseController = require('lib/controllers/controller');
 var Layout = require('./main/views/layout');
-var Ctrl = BaseController.extend({
 
-  Layout: Layout,
+class Ctrl extends BaseController {
 
-  routes: {
-    '': 'start'
-  },
+  get Layout () {
+    return Layout;
+  }
 
-  onAfterStart: function () {
+  get routes () {
+    return {
+      '': 'start'
+    };
+  }
+
+  onAfterStart () {
     console.log('manage index layout here');
   }
 
-});
+}
 
 module.exports = Ctrl;

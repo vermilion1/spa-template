@@ -1,8 +1,9 @@
 var Backbone = require('backbone');
-var Collection = Backbone.Collection.extend({
+
+class Collection extends Backbone.Collection {
 
   //
 
-});
+}
 
 module.exports = Collection;

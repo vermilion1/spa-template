@@ -1,77 +1,72 @@
 var Controller = require('controller');
-var Ctrl = Controller.extend({
+
+class Ctrl extends Controller {
 
   /**
-   * @type {Marionette.LayoutView?}
+   * @abstract
+   * @type {Marionette.LayoutView}
    * Base layout class.
    */
-  Layout: null,
+  get Layout () {
+    throw new Error('Layout must be overridden!');
+  }
 
   /**
-   * @type {Object?}
-   * Base layout instance.
+   * @abstract
+   * @type {Object}
+   * Controller routes.
    */
-  layout: null,
-
-  /**
-   * @type {boolean}
-   * Prevent layout rendering.
-   */
-  preventRender: false,
+  get routes () {
+    throw new Error('Routes must be defined!');
+  }
 
   /**
    * Entry point.
    * Here we will:
-   *   - create the layout
-   *   - render it if possible
+   *   - create and render the layout
    *   - invoke post-action method
    */
-  start: function () {
+  start () {
     this.createLayout();
-    this.preventRender || this.renderLayout();
+    this.renderLayout();
     this.onAfterStart();
-  },
+  }
 
   /**
    * Callback that will be executed after starting the controller.
    */
-  onAfterStart: function () {},
+  onAfterStart () {}
 
   /**
    * Handle controller remove.
    * Here we have to care about layout listeners.
    */
-  remove: function () {
+  remove () {
     this.destroyLayout();
-  },
+  }
 
   /**
    * Destroy the layout if possible.
    */
-  destroyLayout: function () {
-    if (this.layout) {
-      this.layout.destroy();
-      this.layout = null;
-    }
-  },
+  destroyLayout () {
+    this.layout.destroy();
+    this.layout = null;
+  }
 
   /**
    * Create the layout if possible.
    */
-  createLayout: function () {
-    var Layout = this.Layout;
-    if (Layout) {
-      this.layout = new Layout();
-    }
-  },
+  createLayout () {
+    this.layout = new this.Layout();
+  }
 
   /**
    * Render the layout if possible.
    */
-  renderLayout: function () {
-    this.layout && this.layout.render();
+  renderLayout () {
+    this.layout.render();
   }
 
-});
+}
 
 module.exports = Ctrl;

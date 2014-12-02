@@ -12,6 +12,7 @@ Using:
 
 
 ####Once cloned
+
     sudo npm install -g bower
     sudo npm install
     bower install
@@ -35,11 +36,12 @@ And application will be available at http://localhost:9001/dist
 
 
 ####For release
+
     npm run build
 
 
 ####TODO
 
- - Compile templates
  - Files structure
- - Remove Traceur (or not?)
+ - Compile templates (Handlebars)
+ - I18n https://github.com/airbnb/polyglot.js

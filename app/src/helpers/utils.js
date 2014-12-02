@@ -1,11 +1,9 @@
-var utils = {
+/**
+ * Function that do nothing.
+ * @returns {undefined}
+ */
+function noop() {}
 
-  /**
-   * Function that do nothing.
-   * @returns {undefined}
-   */
-  noop: function () {}
-
+module.exports = {
+  noop
 };
-
-module.exports = utils;

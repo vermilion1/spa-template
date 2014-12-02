@@ -1,8 +1,9 @@
 var Marionette = require('marionette');
-var ItemView = Marionette.ItemView.extend({
+
+class ItemView extends Marionette.ItemView {
 
   //
 
-});
+}
 
 module.exports = ItemView;

@@ -1,8 +1,9 @@
 var Marionette = require('marionette');
-var CollectionView = Marionette.CollectionView.extend({
+
+class CollectionView extends Marionette.CollectionView {
 
   //
 
-});
+}
 
 module.exports = CollectionView;

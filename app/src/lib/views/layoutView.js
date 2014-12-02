@@ -1,8 +1,9 @@
 var Marionette = require('marionette');
-var LayoutView = Marionette.LayoutView.extend({
+
+class LayoutView extends Marionette.LayoutView {
 
   //
 
-});
+}
 
 module.exports = LayoutView;
