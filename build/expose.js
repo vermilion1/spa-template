@@ -4,7 +4,8 @@ var path = require('path');
 
 function dir(dirs, basePath) {
   var base = path.normalize(basePath + '/').replace(/\\/g, '/');
-  var files = glob.sync(base + '/+(' + dirs.join('|') + ')/**/*.js');
+  var pattern = base + '/+(' + dirs.join('|') + ')/**/*.js';
+  var files = glob.sync(pattern);
 
   return _.map(files, function (file) {
     var path = file.replace(base, '');

@@ -3,11 +3,12 @@ Bootstrap project
 
 Using:
 
- - Node.js
+ - Marionette.js
  - Gulp
  - ES6 (Traceur)
  - Browserify
  - LESS
+ - Bower
 
 
 ####Once cloned
@@ -39,5 +40,8 @@ And application will be available at http://localhost:9001/dist
 
 ####TODO
 
- - Use RequireJS with its paths (aliases)
- - Remove Traceur
+ - app/js/src -> app/src
+ - Use screens.json for JS initialization
+ - Compile templates
+ - Files structure
+ - Remove Traceur (or not?)

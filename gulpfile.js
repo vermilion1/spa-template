@@ -1,8 +1,10 @@
 var gulp = require('gulp');
 var _ = require('underscore');
 var config = require('./config');
+var screens = require('./screens');
 var pkg = require('./package');
 var expose = require('./build/expose');
+var less = require('./build/less');
 var args = require('yargs').argv;
 var env = args.env || 'production';
 var isDev = env === 'development';
@@ -25,11 +27,25 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('less', function() {
-  return gulp.src(config.less.src)
+  return gulp.start(['less:common', 'less:app']);
+});
+
+gulp.task('less:common', function() {
+  return gulp.src(config.lessCommon.src)
     .pipe(plugins.plumber())
     .pipe(plugins.less())
     .pipe(plugins['if'](isProd, plugins.minifyCss()))
-    .pipe(gulp.dest(config.less.dest))
+    .pipe(gulp.dest(config.lessCommon.dest))
+    .pipe(plugins['if'](isDev, plugins.livereload()));
+});
+
+gulp.task('less:app', function() {
+  return gulp.src(less(screens, config.lessApp.screens))
+    .pipe(plugins.plumber())
+    .pipe(plugins.less())
+    .pipe(plugins.concat(config.lessApp.name))
+    .pipe(plugins['if'](isProd, plugins.minifyCss()))
+    .pipe(gulp.dest(config.lessApp.dest))
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
@@ -108,7 +124,8 @@ gulp.task('build', ['clean'], function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(config.less.watch, ['less']);
+  gulp.watch(config.lessCommon.watch, ['less']);
+  gulp.watch(config.lessApp.watch, ['less:app']);
   gulp.watch(config.html.src, ['html']);
   gulp.watch(config.jsApp.watch, ['js:app']);
   gulp.watch(config.jsVendor.watch, ['js:vendor']);

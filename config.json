@@ -43,9 +43,15 @@
     "name": "vendor.js",
     "dest": "./dist/js"
   },
-  "less": {
+  "lessCommon": {
     "watch": ["./app/less/**/*.less"],
     "src": ["./app/less/**/*.less", "!./app/less/**/_*.less"],
+    "dest": "./dist/stylesheets"
+  },
+  "lessApp": {
+    "watch": ["./app/js/src/screens/**/*.less"],
+    "screens": "./app/js/src/screens",
+    "name": "app.css",
     "dest": "./dist/stylesheets"
   },
   "html": {
