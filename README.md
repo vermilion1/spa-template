@@ -40,7 +40,6 @@ And application will be available at http://localhost:9001/dist
 
 ####TODO
 
- - app/js/src -> app/src
  - Use screens.json for JS initialization
  - Compile templates
  - Files structure

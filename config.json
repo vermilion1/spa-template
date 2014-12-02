@@ -8,16 +8,16 @@
   "jshint": {
     "src": [
       "./gulpfile.js",
-      "./app/js/src/**/*.js",
-      "./app/js/tests/**/*.js"
+      "./app/src/**/*.js",
+      "./app/tests/**/*.js"
     ]
   },
   "jsApp": {
-    "watch": ["./app/js/src/**/*.js"],
-    "src": ["./app/js/src/index.js"],
+    "watch": ["./app/src/**/*.js"],
+    "src": ["./app/src/index.js"],
     "dest": "./dist/js",
     "expose": {
-      "basePath": "./app/js/src",
+      "basePath": "./app/src",
       "directories": ["lib"],
       "files": {
         "constants": "./helpers/constants",
@@ -27,15 +27,15 @@
     }
   },
   "jsVendor": {
-    "watch": ["./app/js/vendor/*.js", "./bower_components/**/*.js"],
-    "src": "./app/js/src/vendor.js",
+    "watch": ["./app/vendor/*.js", "./bower_components/**/*.js"],
+    "src": "./app/src/vendor.js",
     "dest": "./dist/js",
     "require": {
-      "jquery": "../../../bower_components/jquery/dist/jquery.js",
-      "underscore": "../../../bower_components/underscore/underscore.js",
-      "backbone": "../../../bower_components/backbone/backbone.js",
-      "controller": "../../../bower_components/backbone.controller/backbone.controller.js",
-      "marionette": "../../../bower_components/marionette/lib/backbone.marionette.js"
+      "jquery": "../../bower_components/jquery/dist/jquery.js",
+      "underscore": "../../bower_components/underscore/underscore.js",
+      "backbone": "../../bower_components/backbone/backbone.js",
+      "controller": "../../bower_components/backbone.controller/backbone.controller.js",
+      "marionette": "../../bower_components/marionette/lib/backbone.marionette.js"
     }
   },
   "jsVendorConcat": {
@@ -49,8 +49,8 @@
     "dest": "./dist/stylesheets"
   },
   "lessApp": {
-    "watch": ["./app/js/src/screens/**/*.less"],
-    "screens": "./app/js/src/screens",
+    "watch": ["./app/src/screens/**/*.less"],
+    "screens": "./app/src/screens",
     "name": "app.css",
     "dest": "./dist/stylesheets"
   },

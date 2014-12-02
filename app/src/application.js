@@ -3,8 +3,8 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 var Marionette = require('marionette');
 
-var Index = require('./screens/index');
-var NotFound = require('./screens/not-found');
+var Index = require('./screens/index/index');
+var NotFound = require('./screens/not-found/index');
 
 var Application = Marionette.Application.extend({
 
