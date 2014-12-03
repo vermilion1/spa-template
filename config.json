@@ -12,7 +12,7 @@
     ]
   },
   "jsApp": {
-    "watch": ["./app/src/**/*.js"],
+    "watch": ["./app/src/**/*.js", "./app/src/screens/**/*.hbs"],
     "src": ["./app/src/index.js"],
     "dest": "./dist/js",
     "expose": {

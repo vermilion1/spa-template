@@ -30,7 +30,8 @@ Optionally you can start simple static server in this way:
 
 Or in this way:
 
-    python -m SimpleHTTPServer 9001
+    python -m http.server 9001      # python 3
+    python -m SimpleHTTPServer 9001 # python 2
 
 And application will be available at http://localhost:9001/dist
 

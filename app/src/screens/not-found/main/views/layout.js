@@ -1,10 +1,10 @@
-var _ = require('underscore');
 var RootLayoutView = require('lib/views/rootLayoutView');
+var template = require('../templates/layout.hbs');
 
 class LayoutView extends RootLayoutView {
 
   get template () {
-    return _.template('<div class="not-found">Page not found.</div>');
+    return template;
   }
 
 }

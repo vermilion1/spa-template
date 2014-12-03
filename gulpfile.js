@@ -12,6 +12,7 @@ var isProd = !isDev;
 var each = _.each.bind(_);
 var extend = _.extend.bind(_);
 var plugins = extend(require('gulp-load-plugins')(), {
+  hbsfy: require('hbsfy').configure({extensions: ['hbs']}),
   sequence: require('run-sequence'),
   del: require('del')
 });
@@ -52,7 +53,7 @@ gulp.task('less:app', function() {
 gulp.task('js:app', function() {
   return gulp.src(config.jsApp.src)
     .pipe(plugins.plumber())
-    .pipe(plugins.browserify())
+    .pipe(plugins.browserify({transform: [plugins.hbsfy]}))
     .on('prebundle', function(bundle) {
       each(expose.screen(screens), expose.require(bundle));
       each(expose.dir(config.jsApp.expose.directories, config.jsApp.expose.basePath), expose.require(bundle));
