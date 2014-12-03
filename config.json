@@ -12,12 +12,12 @@
     ]
   },
   "jsApp": {
-    "watch": ["./app/src/**/*.js", "./app/src/screens/**/*.hbs"],
+    "watch": ["./app/src/**/*.js", "./app/src/**/*.hbs"],
     "src": ["./app/src/index.js"],
     "dest": "./dist/js",
     "expose": {
       "basePath": "./app/src",
-      "directories": ["lib"],
+      "directories": ["lib", "screens/shared"],
       "files": {
         "screens": "../../screens",
         "constants": "./helpers/constants",
@@ -50,6 +50,7 @@
   },
   "lessApp": {
     "watch": ["./app/src/**/*.less"],
+    "shared": ["./app/src/screens/shared/**/*.less"],
     "app": "./app/src",
     "name": "app.css",
     "dest": "./dist/stylesheets"

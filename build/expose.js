@@ -10,15 +10,18 @@ function screen(screens) {
 
 function dir(dirs, basePath) {
   var base = normalizeBasePath(basePath);
-  var pattern = base + '/+(' + dirs.join('|') + ')/**/*.js';
-  var files = glob.sync(pattern);
+  var result = [];
 
-  return _.map(files, function (file) {
-    var path = file.replace(base, '');
-    var expose = path.replace(/\.js$/, '');
+  _.each(dirs, function (dir) {
+    _.each(glob.sync(base + dir + '/**/*.js'), function (file) {
+      var path = file.replace(base, '');
+      var expose = path.replace(/\.js$/, '');
 
-    return ['./' + path, {expose: expose}];
+      result.push(['./' + path, {expose: expose}]);
+    });
   });
+
+  return result;
 }
 
 function file(files) {

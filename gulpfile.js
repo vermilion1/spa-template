@@ -41,7 +41,7 @@ gulp.task('less:common', function() {
 });
 
 gulp.task('less:app', function() {
-  return gulp.src(less(screens, config.lessApp.app))
+  return gulp.src(less(screens, config.lessApp.app).concat(config.lessApp.shared))
     .pipe(plugins.plumber())
     .pipe(plugins.less())
     .pipe(plugins.concat(config.lessApp.name))
