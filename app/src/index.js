@@ -1,7 +1,10 @@
 var Backbone = require('backbone');
 
-// Require stickit plugin
-require('backbone.stickit');
+// Require custom stickit handlers
+require('./helpers/stickit');
+
+// Require custom handlebars helpers
+require('./helpers/handlebars');
 
 // Inject jQuery to the Backbone
 Backbone.$ = require('jquery');
