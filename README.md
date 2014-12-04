@@ -55,17 +55,16 @@ And check out `./dist` directory.
     |--lib
     |--screens
     |----shared
-    |------component_name
+    |------component-name
     |--------collections
     |--------less
     |--------models
     |--------templates
     |--------views
-    |----screen_name
-    |------component_name
+    |----screen-name
+    |------component-name
 
 
 ###TODO
 
- - Use CollectionView + Collection for navigation
  - I18n https://github.com/airbnb/polyglot.js

@@ -9,15 +9,19 @@ function screen(screens) {
 }
 
 function dir(dirs, basePath) {
-  var base = normalizeBasePath(basePath);
   var result = [];
+  var base;
 
-  _.each(dirs, function (dir) {
-    _.each(glob.sync(base + dir + '/**/*.js'), function (file) {
-      var path = file.replace(base, '');
-      var expose = path.replace(/\.js$/, '');
+  _.each(dirs, function (dir, alias) {
+    dir = normalizePath(dir + '/');
+    alias = normalizePath(alias + '/');
+    base = normalizePath([basePath, dir].join('/'));
 
-      result.push(['./' + path, {expose: expose}]);
+    _.each(glob.sync(base + '/**/*.js'), function (file) {
+      result.push([
+        './' + file.replace(base, dir),
+        {expose: file.replace(base, alias).replace(/\.js$/, '')}
+      ]);
     });
   });
 
@@ -30,8 +34,8 @@ function file(files) {
   });
 }
 
-function normalizeBasePath(basePath) {
-  return path.normalize(basePath + '/').replace(/\\/g, '/');
+function normalizePath(input) {
+  return path.normalize(input + '/').replace(/\\/g, '/');
 }
 
 function withBundle(bundle, method) {

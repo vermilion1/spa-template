@@ -1,4 +1,4 @@
-var LayoutView = require('./layoutView');
+var LayoutView = require('./layout-view');
 
 class RootLayoutView extends LayoutView {
 

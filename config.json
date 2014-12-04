@@ -17,7 +17,10 @@
     "dest": "./dist/js",
     "expose": {
       "basePath": "./app/src",
-      "directories": ["lib", "screens/shared"],
+      "directories": {
+        "lib": "./lib",
+        "shared": "./screens/shared"
+      },
       "files": {
         "screens": "../../screens",
         "constants": "./helpers/constants",

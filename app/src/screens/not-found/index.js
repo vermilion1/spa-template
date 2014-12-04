@@ -1,5 +1,6 @@
 var BaseController = require('lib/controllers/controller');
-var Layout = require('./main/views/layout');
+var Layout = require('./main/views/not-found-layout-view');
+var NavigationCollection = require('shared/navigation/collections/navigation-collection');
 
 class Ctrl extends BaseController {
 
@@ -14,7 +15,16 @@ class Ctrl extends BaseController {
   }
 
   onAfterStart () {
-    console.log('manage not-found layout here');
+    this.showNavigation();
+    this.showContent();
+  }
+
+  showNavigation () {
+    this.layout.showNavigation(new NavigationCollection());
+  }
+
+  showContent () {
+    this.layout.showContent();
   }
 
 }
