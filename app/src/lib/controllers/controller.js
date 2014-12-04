@@ -1,4 +1,4 @@
-var Controller = require('controller');
+var Controller = require('backbone.controller');
 
 class Ctrl extends Controller {
 
