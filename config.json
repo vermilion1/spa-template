@@ -22,7 +22,6 @@
         "shared": "./screens/shared"
       },
       "files": {
-        "screens": "../../screens",
         "constants": "./helpers/constants",
         "mediator": "./helpers/mediator",
         "utils": "./helpers/utils"
@@ -53,9 +52,7 @@
     "dest": "./dist/stylesheets"
   },
   "lessApp": {
-    "watch": ["./app/src/**/*.less"],
-    "shared": ["./app/src/screens/shared/**/*.less"],
-    "app": "./app/src",
+    "src": ["./app/src/screens/**/*.less"],
     "name": "app.css",
     "dest": "./dist/stylesheets"
   },

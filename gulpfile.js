@@ -1,10 +1,8 @@
 var gulp = require('gulp');
 var _ = require('underscore');
 var config = require('./config');
-var screens = require('./screens');
 var pkg = require('./package');
-var expose = require('./build/expose');
-var less = require('./build/less');
+var expose = require('./gulp/expose');
 var args = require('yargs').argv;
 var env = args.env || 'production';
 var isDev = env === 'development';
@@ -41,7 +39,7 @@ gulp.task('less:common', function() {
 });
 
 gulp.task('less:app', function() {
-  return gulp.src(less(screens, config.lessApp.app).concat(config.lessApp.shared))
+  return gulp.src(config.lessApp.src)
     .pipe(plugins.plumber())
     .pipe(plugins.less())
     .pipe(plugins.concat(config.lessApp.name))
@@ -55,7 +53,6 @@ gulp.task('js:app', function() {
     .pipe(plugins.plumber())
     .pipe(plugins.browserify({transform: [plugins.hbsfy]}))
     .on('prebundle', function(bundle) {
-      each(expose.screen(screens), expose.require(bundle));
       each(expose.dir(config.jsApp.expose.directories, config.jsApp.expose.basePath), expose.require(bundle));
       each(expose.file(config.jsApp.expose.files), expose.require(bundle));
       each(expose.file(config.jsVendor.require), expose.external(bundle));
@@ -73,9 +70,7 @@ gulp.task('js:vendor:browserify', function() {
   return gulp.src(config.jsVendor.src)
     .pipe(plugins.browserify())
     .on('prebundle', function(bundle) {
-      each(expose.file(config.jsVendor.require), function (args) {
-        bundle.require.apply(bundle, args);
-      });
+      each(expose.file(config.jsVendor.require), expose.require(bundle));
     })
     .pipe(gulp.dest(config.jsVendor.dest));
 });
@@ -121,7 +116,7 @@ gulp.task('build', ['clean'], function () {
 
 gulp.task('watch', function() {
   gulp.watch(config.lessCommon.watch, ['less']);
-  gulp.watch(config.lessApp.watch, ['less:app']);
+  gulp.watch(config.lessApp.src, ['less:app']);
   gulp.watch(config.html.src, ['html']);
   gulp.watch(config.jsApp.watch, ['js:app']);
   gulp.watch(config.jsVendor.watch, ['js:vendor']);

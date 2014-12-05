@@ -2,12 +2,6 @@ var _ = require('underscore');
 var glob = require('glob');
 var path = require('path');
 
-function screen(screens) {
-  return _.map(screens, function (screen) {
-    return ['./' + screen, {expose: screen}];
-  });
-}
-
 function dir(dirs, basePath) {
   var result = [];
   var base;
@@ -53,7 +47,6 @@ function externalBundle(bundle) {
 }
 
 module.exports = {
-  screen: screen,
   dir: dir,
   file: file,
   require: requireBundle,
