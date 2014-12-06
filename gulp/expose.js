@@ -11,7 +11,7 @@ function dir(dirs, basePath) {
     alias = normalizePath(alias + '/');
     base = normalizePath([basePath, dir].join('/'));
 
-    _.each(glob.sync(base + '/**/*.js'), function (file) {
+    _.each(glob.sync(base + '/**/*.+(js|json)'), function (file) {
       result.push([
         './' + file.replace(base, dir),
         {expose: file.replace(base, alias).replace(/\.js$/, '')}

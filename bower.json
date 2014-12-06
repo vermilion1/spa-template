@@ -6,6 +6,7 @@
     "jquery": "1.11.0",
     "marionette": "~2.2.2",
     "backbone.controller": "*",
-    "backbone.stickit": "~0.8.0"
+    "backbone.stickit": "~0.8.0",
+    "polyglot": "~0.4.1"
   }
 }

@@ -51,16 +51,16 @@ And check out `./dist` directory.
     less
     |--components
     src
+    |--components
+    |----component-name
+    |------collections
+    |------less
+    |------models
+    |------templates
+    |------views
     |--helpers
     |--lib
     |--screens
-    |----shared
-    |------component-name
-    |--------collections
-    |--------less
-    |--------models
-    |--------templates
-    |--------views
     |----screen-name
     |------component-name
 

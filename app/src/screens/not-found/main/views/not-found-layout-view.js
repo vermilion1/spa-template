@@ -1,5 +1,5 @@
 var ScreenLayoutView = require('lib/views/screen-layout-view');
-var NavigationView = require('shared/navigation/views/navigation-view');
+var NavigationView = require('components/navigation/views/navigation-view');
 var NotFoundView = require('./not-found-view');
 var template = require('../templates/layout.hbs');
 

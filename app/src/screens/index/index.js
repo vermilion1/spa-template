@@ -1,8 +1,7 @@
-var BaseController = require('lib/controllers/controller');
+var ScreenCtrl = require('lib/controllers/screen-ctrl');
 var Layout = require('./main/views/index-layout-view');
-var NavigationCollection = require('shared/navigation/collections/navigation-collection');
 
-class Ctrl extends BaseController {
+class Ctrl extends ScreenCtrl {
 
   get Layout () {
     return Layout;
@@ -20,7 +19,7 @@ class Ctrl extends BaseController {
   }
 
   showNavigation () {
-    this.layout.showNavigation(new NavigationCollection());
+    this.layout.showNavigation();
   }
 
   showContent () {

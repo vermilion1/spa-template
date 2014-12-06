@@ -18,13 +18,15 @@
     "expose": {
       "basePath": "./app/src",
       "directories": {
+        "lang": "../lang",
         "lib": "./lib",
-        "shared": "./screens/shared"
+        "components": "./components"
       },
       "files": {
         "constants": "./helpers/constants",
         "mediator": "./helpers/mediator",
-        "utils": "./helpers/utils"
+        "utils": "./helpers/utils",
+        "polyglot": "./helpers/polyglot"
       }
     }
   },
@@ -38,7 +40,8 @@
       "backbone": "../../bower_components/backbone/backbone.js",
       "backbone.controller": "../../bower_components/backbone.controller/backbone.controller.js",
       "backbone.stickit": "../../bower_components/backbone.stickit/backbone.stickit.js",
-      "marionette": "../../bower_components/marionette/lib/backbone.marionette.js"
+      "marionette": "../../bower_components/marionette/lib/backbone.marionette.js",
+      "polyglot.l18n": "../../bower_components/polyglot/build/polyglot.js"
     }
   },
   "jsVendorConcat": {
@@ -52,7 +55,7 @@
     "dest": "./dist/stylesheets"
   },
   "lessApp": {
-    "src": ["./app/src/screens/**/*.less"],
+    "src": ["./app/src/**/*.less"],
     "name": "app.css",
     "dest": "./dist/stylesheets"
   },
