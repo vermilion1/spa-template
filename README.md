@@ -4,6 +4,9 @@ Bootstrap project
 Using:
 
  - Marionette.js
+ - Handlebars
+ - Polyglot
+ - Backbone.stickit
  - Gulp
  - ES6 (Traceur)
  - Browserify
@@ -67,6 +70,5 @@ And check out `./dist` directory.
 
 ###TODO
 
- - Add stickit, hbs and polyglot to description
  - Add comments
  - Describe the structure
