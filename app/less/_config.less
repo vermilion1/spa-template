@@ -1,5 +1,21 @@
+// Typography
+// ----------
 @font-family: Arial;
 @font-size: 14px;
 @line-height: 1.4;
 
+
+// Borders
+// -------
 @border-radius: 3px;
+
+
+// Breakpoints
+// -----------
+@max-screen-mobile: 500px;
+@max-screen-tablet: 960px;
+
+@mobile: %(~"all and (max-width: %a)", @max-screen-mobile);
+@tablet: %(~"all and (min-width: %a) and (max-width: %a)", @max-screen-mobile + 1, @max-screen-tablet);
+@tablet-and-up: %(~"all and (min-width: %a)", @max-screen-mobile + 1);
+@desktop: %(~"all and (min-width: %a)", @max-screen-tablet + 1);

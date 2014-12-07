@@ -67,7 +67,6 @@ And check out `./dist` directory.
 
 ###TODO
 
- - Add responsive architecture
  - Add stickit, hbs and polyglot to description
  - Add comments
  - Describe the structure

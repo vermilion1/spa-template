@@ -1,6 +1,27 @@
+// Breakpoint
+// ----------
+// @Example:
+// .breakpoint(@tablet, {
+//   .class-name {
+//     padding: 20px;
+//   }
+// });
+//
+// @Example:
+// .class-name {
+//   .breakpoint(@tablet, {
+//     padding: 20px;
+//   })
+// };
+.breakpoint(@breakpoint, @rules) {
+  @media @breakpoint {
+    @rules();
+  }
+}
+
+
 // Clearfix
 // --------
-
 .clearfix() {
   &:before,
   &:after {
@@ -12,7 +33,10 @@
   }
 }
 
-.stretch(@top: auto, @right: auto, @bottom: auto, @left: auto) {
+
+// Stretch an element
+// ------------------
+.stretch(@top: 0, @right: 0, @bottom: 0, @left: 0) {
   position: absolute;
   top: @top;
   right: @right;
