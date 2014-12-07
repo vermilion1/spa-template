@@ -13,8 +13,8 @@ Using:
 
 ###Once cloned
 
-    sudo npm install -g bower
-    sudo npm install
+    npm install -g bower # or with sudo
+    npm install # or with sudo
     bower install
 
 
@@ -67,4 +67,7 @@ And check out `./dist` directory.
 
 ###TODO
 
- - I18n https://github.com/airbnb/polyglot.js
+ - Add responsive architecture
+ - Add stickit, hbs and polyglot to description
+ - Add comments
+ - Describe the structure
