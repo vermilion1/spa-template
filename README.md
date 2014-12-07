@@ -1,5 +1,5 @@
-Bootstrap project
------------------
+Single-page Application Template
+--------------------------------
 
 Using:
 
@@ -70,5 +70,8 @@ And check out `./dist` directory.
 
 ###TODO
 
+ - Update es6 code
+ - Use static methods/properties
+ - Update browserify https://medium.com/@sogko/gulp-browserify-the-gulp-y-way-bb359b3f9623
  - Add comments
  - Describe the structure
