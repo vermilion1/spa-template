@@ -8,13 +8,9 @@ var polyglot = require('polyglot');
 /**
  * Polyglot helper.
  */
-Handlebars.registerHelper('t', function (string, data) {
-  return polyglot.t(string, data);
-});
+Handlebars.registerHelper('t', (string, data) => polyglot.t(string, data));
 
 /**
  * Uppercase input string.
  */
-Handlebars.registerHelper('uppercase', function (string) {
-  return string.toUpperCase();
-});
+Handlebars.registerHelper('uppercase', string => string.toUpperCase());

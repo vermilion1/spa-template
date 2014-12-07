@@ -3,12 +3,11 @@ var template = require('../templates/not-found.hbs');
 
 class NotFoundView extends ItemView {
 
-  get template () {
-    return template;
-  }
+  inject (options) {
+    super.inject(options);
 
-  get className () {
-    return 'not-found';
+    this.template = template;
+    this.className = 'not-found';
   }
 
 }

@@ -5,27 +5,19 @@ var template = require('../templates/navigation.hbs');
 
 class NavigationView extends ItemView {
 
-  get template () {
-    return template;
-  }
+  inject (options) {
+    super.inject(options);
 
-  get tagName () {
-    return 'ul';
-  }
+    this.template = template;
+    this.className = 'navigation';
+    this.tagName = 'ul';
 
-  get className () {
-    return 'navigation';
-  }
-
-  events () {
-    return {
-      'click @ui.language': 'languageClickHandler'
-    };
-  }
-
-  initialize () {
     this.ui = {
       language: '[data-language]'
+    };
+
+    this.events = {
+      'click @ui.language': 'languageClickHandler'
     };
   }
 

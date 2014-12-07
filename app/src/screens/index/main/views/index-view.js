@@ -3,12 +3,11 @@ var template = require('../templates/index.hbs');
 
 class IndexView extends ItemView {
 
-  get template () {
-    return template;
-  }
+  inject (options) {
+    super.inject(options);
 
-  get className () {
-    return 'index';
+    this.template = template;
+    this.className = 'index';
   }
 
 }

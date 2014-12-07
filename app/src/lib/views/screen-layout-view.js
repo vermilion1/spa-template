@@ -2,8 +2,14 @@ var LayoutView = require('./layout-view');
 
 class RootLayoutView extends LayoutView {
 
-  get el () {
-    return '[data-view]';
+  /**
+   * @override
+   * Set an element of the screen layout.
+   * @param options {Object|undefined} View options.
+   */
+  inject (options) {
+    super.inject(options);
+    this.el = '[data-view]';
   }
 
   /**

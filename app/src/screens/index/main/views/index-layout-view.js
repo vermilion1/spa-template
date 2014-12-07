@@ -5,12 +5,11 @@ var template = require('../templates/layout.hbs');
 
 class LayoutView extends ScreenLayoutView {
 
-  get template () {
-    return template;
-  }
+  inject (options) {
+    super.inject(options);
 
-  regions () {
-    return {
+    this.template = template;
+    this.regions = {
       navigationRegion: '[data-region="navigation"]',
       contentRegion: '[data-region="content"]'
     };

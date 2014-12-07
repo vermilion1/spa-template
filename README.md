@@ -70,8 +70,7 @@ And check out `./dist` directory.
 
 ###TODO
 
- - Update es6 code
- - Use static methods/properties
- - Update browserify https://medium.com/@sogko/gulp-browserify-the-gulp-y-way-bb359b3f9623
+ - Research more about paths in browserify (probably create a pull-request)
+ - Try ES6 imports or use RequireJS (screens as packages)
  - Add comments
  - Describe the structure

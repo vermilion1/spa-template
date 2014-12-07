@@ -9,7 +9,5 @@ var Stickit = require('backbone.stickit');
  */
 Stickit.addHandler({
   selector: '[data-stickit-trim]',
-  getVal: function($el) {
-    return $el.val().trim();
-  }
+  getVal: $el => $el.val().trim()
 });

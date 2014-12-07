@@ -9,5 +9,6 @@ require('./helpers/handlebars');
 // Inject jQuery to the Backbone
 Backbone.$ = require('jquery');
 
+// Import and initialize the app
 var Application = require('./application');
 new Application();
