@@ -72,5 +72,6 @@ And check out `./dist` directory.
 
  - Research more about paths in browserify (probably create a pull-request)
  - Try ES6 imports or use RequireJS (screens as packages)
+ - Add sprites task
  - Add comments
  - Describe the structure
