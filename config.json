@@ -71,6 +71,18 @@
     "src": ["./app/images/**/*"],
     "dest": "./dist/images"
   },
+  "sprites": {
+    "src": ["./app/sprites/*.png"],
+    "imgMask": "*.png",
+    "name": "sprite",
+    "prefix": "icon",
+    "style": "_sprite.less",
+    "cssPath": "../images",
+    "processor": "less",
+    "retina": true,
+    "spriteDest": "./dist/images",
+    "styleDest": "./app/less"
+  },
   "server": {
     "port": 9001
   }

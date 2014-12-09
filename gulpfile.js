@@ -10,6 +10,7 @@ var isProd = !isDev;
 var each = _.each.bind(_);
 var extend = _.extend.bind(_);
 var plugins = extend(require('gulp-load-plugins')(), {
+  sprite: require('css-sprite').stream,
   hbsfy: require('hbsfy').configure({extensions: ['hbs']}),
   sequence: require('run-sequence'),
   del: require('del')
@@ -23,10 +24,6 @@ gulp.task('jshint', function() {
   return gulp.src(config.jshint.src)
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter('jshint-stylish'));
-});
-
-gulp.task('less', function() {
-  return gulp.start(['less:common', 'less:app']);
 });
 
 gulp.task('less:common', function() {
@@ -63,7 +60,7 @@ gulp.task('js:app', function() {
 });
 
 gulp.task('js:vendor', function() {
-  return plugins.sequence(['js:vendor:browserify'], ['js:vendor:concat']);
+  plugins.sequence(['js:vendor:browserify'], ['js:vendor:concat']);
 });
 
 gulp.task('js:vendor:browserify', function() {
@@ -80,10 +77,6 @@ gulp.task('js:vendor:concat', function() {
     .pipe(plugins.concat(config.jsVendorConcat.name))
     .pipe(plugins['if'](isProd, plugins.uglify()))
     .pipe(gulp.dest(config.jsVendorConcat.dest));
-});
-
-gulp.task('html', function() {
-  return plugins.sequence(['html:compile'], ['html:min']);
 });
 
 gulp.task('html:compile', function() {
@@ -106,18 +99,39 @@ gulp.task('images', function() {
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
+gulp.task('sprites', function() {
+  return gulp.src(config.sprites.src)
+    .pipe(plugins.sprite({
+      name: config.sprites.name,
+      prefix: config.sprites.prefix,
+      style: config.sprites.style,
+      cssPath: config.sprites.cssPath,
+      processor: config.sprites.processor,
+      retina: config.sprites.retina
+    }))
+    .pipe(plugins['if'](config.sprites.imgMask,
+      gulp.dest(config.sprites.spriteDest),
+      gulp.dest(config.sprites.styleDest))
+    );
+});
+
 gulp.task('default', ['build'], function () {
   gulp.start('watch');
 });
 
 gulp.task('build', ['clean'], function () {
-  plugins.sequence(['jshint', 'js:app', 'js:vendor', 'less', 'images'], ['html']);
+  plugins.sequence(
+    ['jshint', 'js:app', 'js:vendor', 'images', 'sprites'],
+    ['less:common', 'less:app'],
+    ['html:compile', 'html:min']
+  );
 });
 
 gulp.task('watch', function() {
-  gulp.watch(config.lessCommon.watch, ['less']);
+  gulp.watch(config.sprites.src, ['sprites']);
+  gulp.watch(config.lessCommon.watch, ['less:common', 'less:app']);
   gulp.watch(config.lessApp.src, ['less:app']);
-  gulp.watch(config.html.src, ['html']);
+  gulp.watch(config.html.src, ['html:compile', 'html:min']);
   gulp.watch(config.jsApp.watch, ['js:app']);
   gulp.watch(config.jsVendor.watch, ['js:vendor']);
   gulp.watch(config.jshint.src, ['jshint']);
