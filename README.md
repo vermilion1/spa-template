@@ -70,8 +70,7 @@ And check out `./dist` directory.
 
 ###TODO
 
- - Research more about paths in browserify (probably create a pull-request)
- - Try ES6 imports or use RequireJS (screens as packages)
- - Add sprites task
+ - Let's rock with ES6 imports + RequireJS transform
  - Add comments
  - Describe the structure
+ - Add some icon font generator (Low priority)
