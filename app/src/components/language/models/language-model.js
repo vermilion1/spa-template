@@ -1,19 +1,20 @@
-var _ = require('underscore');
-var constants = require('constants');
-var Model = require('lib/models/model');
-var polyglot = require('polyglot');
+import {_} from '../../../vendor';
+import Model from '../../../lib/models/model';
+import {LANGUAGES} from '../../../helpers/constants';
+import polyglot from '../../../helpers/polyglot';
 
-class LanguageModel extends Model {
+
+export default class LanguageModel extends Model {
 
   defaults () {
     return {
-      language: constants.LANGUAGES[0]
+      language: LANGUAGES[0]
     };
   }
 
   validate (attrs) {
     var errors = {};
-    if (constants.LANGUAGES.indexOf(attrs.language) === -1) {
+    if (LANGUAGES.indexOf(attrs.language) === -1) {
       errors.language = polyglot.t('language.invalid');
     }
     return _.isEmpty(errors) ? false : errors;
@@ -28,5 +29,3 @@ class LanguageModel extends Model {
   }
 
 }
-
-module.exports = LanguageModel;

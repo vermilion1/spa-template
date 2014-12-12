@@ -1,7 +1,10 @@
-var ItemView = require('lib/views/item-view');
-var template = require('../templates/not-found.hbs');
+import ItemView from '../../../../lib/views/item-view';
 
-class NotFoundView extends ItemView {
+//TODO:
+//import template from '../templates/not-found.hbs'
+const template = `{{t "not-found.message"}}`;
+
+export default class NotFoundView extends ItemView {
 
   inject (options) {
     super.inject(options);
@@ -11,5 +14,3 @@ class NotFoundView extends ItemView {
   }
 
 }
-
-module.exports = NotFoundView;

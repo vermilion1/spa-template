@@ -1,6 +1,6 @@
-var Controller = require('backbone.controller');
+import {Controller} from '../../vendor';
 
-class Ctrl extends Controller {
+export default class Ctrl extends Controller {
 
   /**
    * @abstract
@@ -68,5 +68,3 @@ class Ctrl extends Controller {
   }
 
 }
-
-module.exports = Ctrl;

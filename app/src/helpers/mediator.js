@@ -1,5 +1,3 @@
-var _ = require('underscore');
-var Backbone = require('backbone');
-var mediator = _.extend({}, Backbone.Events);
+import {_, Backbone} from '../vendor';
 
-module.exports = mediator;
+export default _.extend({}, Backbone.Events);

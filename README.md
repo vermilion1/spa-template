@@ -70,7 +70,11 @@ And check out `./dist` directory.
 
 ###TODO
 
- - Let's rock with ES6 imports + RequireJS transform
+ - Precompile templates
+ - Read languages from json
+ - Separate file for vendors
+ - Clean up dependencies after all changes
+ - Source maps
  - Add comments
  - Describe the structure
  - Add some icon font generator (Low priority)

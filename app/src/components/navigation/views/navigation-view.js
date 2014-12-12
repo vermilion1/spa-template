@@ -1,9 +1,24 @@
-var ItemView = require('lib/views/item-view');
-var constants = require('constants');
-var mediator = require('mediator');
-var template = require('../templates/navigation.hbs');
+import ItemView from '../../../lib/views/item-view';
+import {CHANGE_LANGUAGE} from '../../../helpers/constants';
+import mediator from '../../../helpers/mediator';
 
-class NavigationView extends ItemView {
+//TODO:
+//import template from '../templates/navigation.hbs'
+
+var template = `<li>
+    <a href="#">{{t "navigation.home"}}</a>
+</li>
+
+<li>
+    <a href="#broken">{{t "navigation.broken"}}</a>
+</li>
+
+<li>
+    <a href="#" data-language="en-US">{{t "language.en"}}</a>
+    <a href="#" data-language="uk">{{t "language.uk"}}</a>
+</li>`;
+
+export default class NavigationView extends ItemView {
 
   inject (options) {
     super.inject(options);
@@ -27,9 +42,7 @@ class NavigationView extends ItemView {
 
   languageClickHandler (e) {
     e.preventDefault();
-    mediator.trigger(constants.EVENTS.CHANGE_LANGUAGE, this.getLanguageFromEvent(e));
+    mediator.trigger(CHANGE_LANGUAGE, this.getLanguageFromEvent(e));
   }
 
 }
-
-module.exports = NavigationView;

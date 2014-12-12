@@ -2,7 +2,7 @@
 // --------------------
 // https://github.com/NYTimes/backbone.stickit#addhandler
 
-var Stickit = require('backbone.stickit');
+import {Stickit} from '../vendor';
 
 /**
  * Display trimmed value.

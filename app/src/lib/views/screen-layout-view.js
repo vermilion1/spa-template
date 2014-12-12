@@ -1,6 +1,6 @@
-var LayoutView = require('./layout-view');
+import LayoutView from './layout-view';
 
-class RootLayoutView extends LayoutView {
+export default class RootLayoutView extends LayoutView {
 
   /**
    * @override
@@ -24,5 +24,3 @@ class RootLayoutView extends LayoutView {
   }
 
 }
-
-module.exports = RootLayoutView;

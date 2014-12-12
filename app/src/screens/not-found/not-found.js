@@ -1,7 +1,7 @@
-var ScreenCtrl = require('lib/controllers/screen-ctrl');
-var Layout = require('./main/views/not-found-layout-view');
+import ScreenCtrl from '../../lib/controllers/screen-ctrl';
+import Layout from './main/views/not-found-layout-view';
 
-class Ctrl extends ScreenCtrl {
+export default class Ctrl extends ScreenCtrl {
 
   get Layout () {
     return Layout;
@@ -27,5 +27,3 @@ class Ctrl extends ScreenCtrl {
   }
 
 }
-
-module.exports = Ctrl;

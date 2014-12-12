@@ -2,8 +2,8 @@
 // --------------------
 // https://github.com/wycats/handlebars.js/#registering-helpers
 
-var Handlebars = require('hbsfy/runtime');
-var polyglot = require('polyglot');
+import {Handlebars} from '../vendor';
+import polyglot from '../helpers/polyglot';
 
 /**
  * Polyglot helper.

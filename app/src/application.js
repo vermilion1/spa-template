@@ -1,22 +1,13 @@
-var $ = require('jquery');
-var Backbone = require('backbone');
-var Marionette = require('marionette');
+import {$, Backbone, Marionette} from './vendor';
+import Language from './components/language/language';
+import NotFound from './screens/not-found/not-found';
+import Index from './screens/index/index';
 
-// Common components
-var Language = require('components/language/index');
+// Import just to inject some data
+import {} from './helpers/stickit';
+import {} from './helpers/handlebars';
 
-// Screens
-var NotFound = require('./screens/not-found');
-var Index = require('./screens/index');
-
-class Application extends Marionette.Application {
-
-  /**
-   * Add application load listener.
-   */
-  initialize () {
-    this.addLoadListener();
-  }
+export default class Application extends Marionette.Application {
 
   /**
    * Apply some rules before the app will start.
@@ -55,14 +46,6 @@ class Application extends Marionette.Application {
   }
 
   /**
-   * Add application load listener.
-   * Once headjs plugin loads all resources we have to start the app.
-   */
-  addLoadListener () {
-    window.head.ready(this.start.bind(this));
-  }
-
-  /**
    * Hide loading screen.
    */
   hideLoading () {
@@ -72,5 +55,3 @@ class Application extends Marionette.Application {
   }
 
 }
-
-module.exports = Application;

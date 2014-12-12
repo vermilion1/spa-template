@@ -1,6 +1,6 @@
-var Marionette = require('marionette');
+import {Marionette} from '../../vendor';
 
-class CompositeView extends Marionette.CompositeView {
+export default class CompositeView extends Marionette.CompositeView {
 
   /**
    * Inject view properties before creating an instance.
@@ -19,5 +19,3 @@ class CompositeView extends Marionette.CompositeView {
   inject () {}
 
 }
-
-module.exports = CompositeView;

@@ -1,10 +1,11 @@
-var Ctrl = require('lib/controllers/ctrl');
-var constants = require('constants');
-var mediator = require('mediator');
-var polyglot = require('polyglot');
-var LanguageModel = require('./models/language-model');
+import Ctrl from '../../lib/controllers/ctrl';
+import LanguageModel from './models/language-model';
+import polyglot from '../../helpers/polyglot';
+import mediator from '../../helpers/mediator';
+import {CHANGE_LANGUAGE} from '../../helpers/constants';
+import lang from '../../lang';
 
-class LanguageCtrl extends Ctrl {
+export default class LanguageCtrl extends Ctrl {
 
   initialize () {
     this.createModel();
@@ -18,12 +19,12 @@ class LanguageCtrl extends Ctrl {
   }
 
   addListeners () {
-    this.listenTo(mediator, constants.EVENTS.CHANGE_LANGUAGE, this.onChangeLanguageRequest);
+    this.listenTo(mediator, CHANGE_LANGUAGE, this.onChangeLanguageRequest);
     this.listenTo(this.model, 'change:language', this.onLanguageChange);
   }
 
   getLanguageFile (language) {
-    return require('lang/' + language + '.json');
+    return lang[language];
   }
 
   reloadPage () {
@@ -61,11 +62,9 @@ class LanguageCtrl extends Ctrl {
   get browserLanguage () {
     var language = navigator.languages ?
       navigator.languages[0] :
-    navigator.language || navigator.userLanguage;
+      navigator.language || navigator.userLanguage;
 
     return String(language).replace('_', '-');
   }
 
 }
-
-module.exports = LanguageCtrl;

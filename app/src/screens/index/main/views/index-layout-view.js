@@ -1,9 +1,13 @@
-var ScreenLayoutView = require('lib/views/screen-layout-view');
-var NavigationView = require('components/navigation/views/navigation-view');
-var IndexView = require('./index-view');
-var template = require('../templates/layout.hbs');
+import ScreenLayoutView from '../../../../lib/views/screen-layout-view';
+import NavigationView from '../../../../components/navigation/views/navigation-view';
+import IndexView from './index-view';
 
-class LayoutView extends ScreenLayoutView {
+//TODO:
+//import template from '../templates/layout.hbs'
+const template = `<div data-region="navigation"></div>
+<div data-region="content"></div>`;
+
+export default class LayoutView extends ScreenLayoutView {
 
   inject (options) {
     super.inject(options);
@@ -24,5 +28,3 @@ class LayoutView extends ScreenLayoutView {
   }
 
 }
-
-module.exports = LayoutView;

@@ -1,6 +1,6 @@
-var Marionette = require('marionette');
+import {Marionette} from '../../vendor';
 
-class ItemView extends Marionette.ItemView {
+export default class ItemView extends Marionette.ItemView {
 
   /**
    * Inject view properties before creating an instance.
@@ -19,5 +19,3 @@ class ItemView extends Marionette.ItemView {
   inject () {}
 
 }
-
-module.exports = ItemView;

@@ -1,9 +1,7 @@
-var Marionette = require('marionette');
+import {Marionette} from '../../vendor';
 
-class Ctrl extends Marionette.Controller {
+export default class Ctrl extends Marionette.Controller {
 
   //
 
 }
-
-module.exports = Ctrl;

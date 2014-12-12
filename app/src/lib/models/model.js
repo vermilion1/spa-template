@@ -1,9 +1,7 @@
-var Backbone = require('backbone');
+import {Backbone} from '../../vendor';
 
-class Model extends Backbone.Model {
+export default class Model extends Backbone.Model {
 
   //
 
 }
-
-module.exports = Model;

@@ -1,7 +1,15 @@
-var ItemView = require('lib/views/item-view');
-var template = require('../templates/index.hbs');
+import ItemView from '../../../../lib/views/item-view';
 
-class IndexView extends ItemView {
+//TODO:
+//import template from '../templates/index.hbs'
+const template = `{{uppercase (t "index.message")}}
+<div>
+    <button type="button" class="btn"><span class="icon icon--facebook"></span></button>
+    <button type="button" class="btn"><span class="icon icon--twitter"></span></button>
+    <button type="button" class="btn"><span class="icon icon--google-plus"></span></button>
+</div>`;
+
+export default class IndexView extends ItemView {
 
   inject (options) {
     super.inject(options);
@@ -11,5 +19,3 @@ class IndexView extends ItemView {
   }
 
 }
-
-module.exports = IndexView;

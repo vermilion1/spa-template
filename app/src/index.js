@@ -1,14 +1,14 @@
-var Backbone = require('backbone');
+import {Marionette, Handlebars} from './vendor';
+import Application from './application';
 
-// Require custom stickit handlers
-require('./helpers/stickit');
+// TODO: precompile templates
 
-// Require custom handlebars helpers
-require('./helpers/handlebars');
+Marionette.TemplateCache.prototype.loadTemplate = function(templateId) {
+  return templateId;
+};
 
-// Inject jQuery to the Backbone
-Backbone.$ = require('jquery');
+Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
+  return Handlebars.compile(rawTemplate);
+};
 
-// Import and initialize the app
-var Application = require('./application');
-new Application();
+new Application().start();
