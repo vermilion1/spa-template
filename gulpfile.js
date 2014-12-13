@@ -44,7 +44,7 @@ gulp.task('less:app', function() {
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
-gulp.task('js', function() {
+gulp.task('js:app', function() {
   plugins.sequence(['js:traceur', 'js:copy-deps'], ['js:browserify']);
 });
 
@@ -66,8 +66,15 @@ gulp.task('js:browserify', function() {
     .pipe(plugins.plumber())
     .pipe(plugins.browserify({transform: [plugins.hbsfy]}))
     .pipe(plugins['if'](isProd, plugins.uglify()))
-    .pipe(plugins.concat(config.jsBrowserify.name))
     .pipe(gulp.dest(config.jsBrowserify.dest));
+});
+
+gulp.task('js:vendor', function() {
+  return gulp.src(config.jsVendor.src)
+    .pipe(plugins.plumber())
+    .pipe(plugins.concat(config.jsVendor.name))
+    .pipe(plugins['if'](isProd, plugins.uglify()))
+    .pipe(gulp.dest(config.jsVendor.dest));
 });
 
 gulp.task('html', function() {
@@ -116,9 +123,9 @@ gulp.task('default', ['build'], function () {
 
 gulp.task('build', ['clean'], function () {
   plugins.sequence(
-    ['jshint', 'js:traceur', 'js:copy-deps', 'images', 'sprites'],
+    ['jshint', 'js:traceur', 'js:copy-deps', 'js:vendor', 'images', 'sprites'],
     ['less:common', 'less:app', 'js:browserify'],
-    ['html:compile', 'html:min']
+    ['html']
   );
 });
 
@@ -127,7 +134,8 @@ gulp.task('watch', function() {
   gulp.watch(config.lessCommon.watch, ['less:common', 'less:app']);
   gulp.watch(config.lessApp.src, ['less:app']);
   gulp.watch(config.html.src, ['html']);
-  gulp.watch(config.js.watch, ['js']);
+  gulp.watch(config.jsApp.watch, ['js:app']);
+  gulp.watch(config.jsVendor.src, ['js:vendor']);
   gulp.watch(config.jshint.src, ['jshint']);
   gulp.watch(config.images.src, ['images']);
 });

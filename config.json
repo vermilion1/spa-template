@@ -1,6 +1,6 @@
 {
   "clean": {
-    "src": ["./dist"]
+    "src": ["./dist", "./tmp"]
   },
   "connect": {
     "root": ["./dist"]
@@ -11,21 +11,34 @@
       "./app/src/**/*.js"
     ]
   },
-  "js": {
+  "jsApp": {
     "watch": ["./app/src/**/*.js", "./app/src/**/*.hbs", "./app/lang/*.json"]
   },
   "jsTraceur": {
     "src": ["./app/src/**/*.js"],
-    "dest": "./dist/js"
+    "dest": "./tmp/js"
   },
   "jsCopyDeps": {
     "src": ["./app/src/**/*.hbs", "./app/lang/*.json"],
-    "hbsDest": "./dist/js",
-    "jsonDest": "./dist/lang"
+    "hbsDest": "./tmp/js",
+    "jsonDest": "./tmp/lang"
   },
   "jsBrowserify": {
-    "src": ["./dist/js/index.js"],
-    "name": "app.js",
+    "src": ["./tmp/js/index.js"],
+    "dest": "./dist/js"
+  },
+  "jsVendor": {
+    "src": [
+      "./bower_components/jquery/dist/jquery.js",
+      "./bower_components/underscore/underscore.js",
+      "./bower_components/backbone/backbone.js",
+      "./bower_components/backbone.controller/backbone.controller.js",
+      "./bower_components/backbone.stickit/backbone.stickit.js",
+      "./bower_components/marionette/lib/backbone.marionette.js",
+      "./bower_components/polyglot/build/polyglot.js",
+      "./bower_components/traceur-runtime/traceur-runtime.js"
+    ],
+    "name": "vendor.js",
     "dest": "./dist/js"
   },
   "lessCommon": {

@@ -70,10 +70,6 @@ And check out `./dist` directory.
 
 ###TODO
 
- - Separate file for concatenated vendors
- - Clean up redundant files in the dist folder (by using some temporary directory?)
- - Source maps
- - Clean up dependencies
  - Add comments
  - Describe the structure
  - Add some icon font generator (Low priority)

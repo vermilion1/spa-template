@@ -25,16 +25,11 @@
 
   <div data-view></div>
 
-  <script src="../bower_components/jquery/dist/jquery.js"></script>
-  <script src="../bower_components/underscore/underscore.js"></script>
-  <script src="../bower_components/backbone/backbone.js"></script>
-  <script src="../bower_components/backbone.controller/backbone.controller.js"></script>
-  <script src="../bower_components/backbone.stickit/backbone.stickit.js"></script>
-  <script src="../bower_components/marionette/lib/backbone.marionette.js"></script>
-  <script src="../bower_components/polyglot/build/polyglot.js"></script>
-  <script src="../bower_components/traceur-runtime/traceur-runtime.js"></script>
   <script>
-    head.load('stylesheets/common.css', 'stylesheets/app.css', 'js/app.js');
+    head.load('stylesheets/common.css', 'stylesheets/app.css', {vendor: 'js/vendor.js'});
+    head.ready('vendor', function () {
+      head.load('js/index.js');
+    });
   </script>
 
 </body>
