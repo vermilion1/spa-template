@@ -4,10 +4,17 @@ import NotFound from './screens/not-found/not-found';
 import Index from './screens/index/index';
 
 // Import just to inject some data
-import {} from './helpers/stickit';
-import {} from './helpers/handlebars';
+import './helpers/stickit';
+import './helpers/handlebars';
 
 export default class Application extends Marionette.Application {
+
+  /**
+   * Add application load listener.
+   */
+  initialize () {
+    this.addLoadListener();
+  }
 
   /**
    * Apply some rules before the app will start.
@@ -43,6 +50,14 @@ export default class Application extends Marionette.Application {
    */
   startHistory () {
     Backbone.history.start();
+  }
+
+  /**
+   * Add application load listener.
+   * Once headjs plugin loads all resources we have to start the app.
+   */
+  addLoadListener () {
+    window.head.ready(this.start.bind(this));
   }
 
   /**

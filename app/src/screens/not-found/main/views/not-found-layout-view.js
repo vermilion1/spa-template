@@ -1,11 +1,7 @@
 import ScreenLayoutView from '../../../../lib/views/screen-layout-view';
 import NavigationView from '../../../../components/navigation/views/navigation-view';
 import NotFoundView from './not-found-view';
-
-//TODO:
-//import template from '../templates/layout.hbs'
-const template = `<div data-region="navigation"></div>
-<div data-region="content"></div>`;
+import template from '../templates/layout.hbs';
 
 export default class LayoutView extends ScreenLayoutView {
 

@@ -20,6 +20,7 @@ gulp.task('clean', function(cb) {
 
 gulp.task('jshint', function() {
   return gulp.src(config.jshint.src)
+    .pipe(plugins.plumber())
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter('jshint-stylish'));
 });
@@ -43,12 +44,30 @@ gulp.task('less:app', function() {
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
-gulp.task('js:app', function() {
-  return gulp.src(config.jsApp.src)
+gulp.task('js', function() {
+  plugins.sequence(['js:traceur', 'js:copy-deps'], ['js:browserify']);
+});
+
+gulp.task('js:traceur', function() {
+  return gulp.src(config.jsTraceur.src)
     .pipe(plugins.plumber())
-    .pipe(plugins.traceur({modules: 'amd'}))
+    .pipe(plugins.traceur({modules: 'commonjs'}))
+    .pipe(gulp.dest(config.jsTraceur.dest));
+});
+
+gulp.task('js:copy-deps', function() {
+  return gulp.src(config.jsCopyDeps.src)
+    .pipe(plugins['if']('*.hbs', gulp.dest(config.jsCopyDeps.hbsDest)))
+    .pipe(plugins['if']('*.json', gulp.dest(config.jsCopyDeps.jsonDest)));
+});
+
+gulp.task('js:browserify', function() {
+  return gulp.src(config.jsBrowserify.src)
+    .pipe(plugins.plumber())
+    .pipe(plugins.browserify({transform: [plugins.hbsfy]}))
     .pipe(plugins['if'](isProd, plugins.uglify()))
-    .pipe(gulp.dest(config.jsApp.dest));
+    .pipe(plugins.concat(config.jsBrowserify.name))
+    .pipe(gulp.dest(config.jsBrowserify.dest));
 });
 
 gulp.task('html', function() {
@@ -97,8 +116,8 @@ gulp.task('default', ['build'], function () {
 
 gulp.task('build', ['clean'], function () {
   plugins.sequence(
-    ['jshint', 'js:app', 'images', 'sprites'],
-    ['less:common', 'less:app'],
+    ['jshint', 'js:traceur', 'js:copy-deps', 'images', 'sprites'],
+    ['less:common', 'less:app', 'js:browserify'],
     ['html:compile', 'html:min']
   );
 });
@@ -107,8 +126,8 @@ gulp.task('watch', function() {
   gulp.watch(config.sprites.src, ['sprites']);
   gulp.watch(config.lessCommon.watch, ['less:common', 'less:app']);
   gulp.watch(config.lessApp.src, ['less:app']);
-  gulp.watch(config.html.src, ['html:compile', 'html:min']);
-  gulp.watch(config.jsApp.watch, ['js:app']);
+  gulp.watch(config.html.src, ['html']);
+  gulp.watch(config.js.watch, ['js']);
   gulp.watch(config.jshint.src, ['jshint']);
   gulp.watch(config.images.src, ['images']);
 });

@@ -11,9 +11,21 @@
       "./app/src/**/*.js"
     ]
   },
-  "jsApp": {
-    "watch": ["./app/src/**/*.js", "./app/src/**/*.hbs"],
+  "js": {
+    "watch": ["./app/src/**/*.js", "./app/src/**/*.hbs", "./app/lang/*.json"]
+  },
+  "jsTraceur": {
     "src": ["./app/src/**/*.js"],
+    "dest": "./dist/js"
+  },
+  "jsCopyDeps": {
+    "src": ["./app/src/**/*.hbs", "./app/lang/*.json"],
+    "hbsDest": "./dist/js",
+    "jsonDest": "./dist/lang"
+  },
+  "jsBrowserify": {
+    "src": ["./dist/js/index.js"],
+    "name": "app.js",
     "dest": "./dist/js"
   },
   "lessCommon": {

@@ -32,14 +32,9 @@
   <script src="../bower_components/backbone.stickit/backbone.stickit.js"></script>
   <script src="../bower_components/marionette/lib/backbone.marionette.js"></script>
   <script src="../bower_components/polyglot/build/polyglot.js"></script>
-  <script src="../bower_components/handlebars/handlebars.js"></script>
   <script src="../bower_components/traceur-runtime/traceur-runtime.js"></script>
-  <script src="../bower_components/requirejs/require.js"></script>
   <script>
-    head.load('stylesheets/common.css', 'stylesheets/app.css');
-    head.ready(function () {
-      require(['js/index']);
-    });
+    head.load('stylesheets/common.css', 'stylesheets/app.css', 'js/app.js');
   </script>
 
 </body>

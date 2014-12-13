@@ -70,11 +70,10 @@ And check out `./dist` directory.
 
 ###TODO
 
- - Precompile templates
- - Read languages from json
- - Separate file for vendors
- - Clean up dependencies after all changes
+ - Separate file for concatenated vendors
+ - Clean up redundant files in the dist folder (by using some temporary directory?)
  - Source maps
+ - Clean up dependencies
  - Add comments
  - Describe the structure
  - Add some icon font generator (Low priority)

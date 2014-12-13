@@ -3,14 +3,19 @@ import LanguageModel from './models/language-model';
 import polyglot from '../../helpers/polyglot';
 import mediator from '../../helpers/mediator';
 import {CHANGE_LANGUAGE} from '../../helpers/constants';
-import lang from '../../lang';
+import LanguageHelper from '../../helpers/language';
 
 export default class LanguageCtrl extends Ctrl {
 
   initialize () {
+    this.createHelper();
     this.createModel();
     this.useLanguage();
     this.addListeners();
+  }
+
+  createHelper () {
+    this.languageHelper = new LanguageHelper();
   }
 
   createModel () {
@@ -23,8 +28,8 @@ export default class LanguageCtrl extends Ctrl {
     this.listenTo(this.model, 'change:language', this.onLanguageChange);
   }
 
-  getLanguageFile (language) {
-    return lang[language];
+  getLanguageFile (lang) {
+    return this.languageHelper.getLanguage(lang);
   }
 
   reloadPage () {
@@ -64,7 +69,7 @@ export default class LanguageCtrl extends Ctrl {
       navigator.languages[0] :
       navigator.language || navigator.userLanguage;
 
-    return String(language).replace('_', '-');
+    return String(language).replace('_', '-').toLowerCase();
   }
 
 }
