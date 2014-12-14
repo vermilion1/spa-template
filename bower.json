@@ -8,6 +8,7 @@
     "backbone.controller": "*",
     "backbone.stickit": "~0.8.0",
     "polyglot": "~0.4.1",
-    "traceur-runtime": "~0.0.79"
+    "traceur-runtime": "~0.0.79",
+    "moment": "~2.8.4"
   }
 }

@@ -9,5 +9,6 @@ export const Controller = Backbone.Controller;
 export const Marionette = Backbone.Marionette;
 export const Stickit = Backbone.Stickit;
 export const Polyglot = wind.Polyglot;
+export const moment = wind.moment;
 
 export {Handlebars};

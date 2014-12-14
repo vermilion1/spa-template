@@ -36,6 +36,7 @@
       "./bower_components/backbone.stickit/backbone.stickit.js",
       "./bower_components/marionette/lib/backbone.marionette.js",
       "./bower_components/polyglot/build/polyglot.js",
+      "./bower_components/moment/moment.js",
       "./bower_components/traceur-runtime/traceur-runtime.js"
     ],
     "name": "vendor.js",
