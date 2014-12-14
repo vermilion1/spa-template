@@ -1,3 +1,7 @@
+// Vendors declaration
+// -------------------
+// Just export global objects which have to be already defined.
+
 import Handlebars from 'hbsfy/runtime';
 
 const wind = window;

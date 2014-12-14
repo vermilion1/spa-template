@@ -64,8 +64,8 @@ export default class Application extends Marionette.Application {
    * Hide loading screen.
    */
   hideLoading () {
-    $('[data-loading]').fadeOut(600, el => {
-      $(el).remove();
+    $('[data-loading]').fadeOut(600, function () {
+      $(this).remove();
     });
   }
 

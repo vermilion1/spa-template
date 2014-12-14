@@ -1,5 +1,5 @@
 // Helpers declaration
-// --------------------
+// -------------------
 // https://github.com/wycats/handlebars.js/#registering-helpers
 
 import {Handlebars, moment} from '../vendor';

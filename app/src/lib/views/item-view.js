@@ -4,7 +4,7 @@ export default class ItemView extends Marionette.ItemView {
 
   /**
    * Inject view properties before creating an instance.
-   * @param options {Object|undefined} View options
+   * @param {Object|undefined} options - View options.
    */
   constructor (options) {
     this.inject(options);

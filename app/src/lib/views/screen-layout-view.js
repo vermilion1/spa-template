@@ -5,7 +5,7 @@ export default class RootLayoutView extends LayoutView {
   /**
    * @override
    * Set an element of the screen layout.
-   * @param options {Object|undefined} View options.
+   * @param {Object|undefined} options - View options.
    */
   inject (options) {
     super.inject(options);
