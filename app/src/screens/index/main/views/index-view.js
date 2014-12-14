@@ -1,8 +1,17 @@
 import ItemView from '../../../../lib/views/item-view';
 import template from '../templates/index.hbs';
 import {CREATED_DATE_FORMAT} from '../../../../helpers/constants';
+import EventBehavior from '../../../../behaviors/event';
 
 export default class IndexView extends ItemView {
+
+  behaviors () {
+    return {
+      EventBehavior: {
+        behaviorClass: EventBehavior
+      }
+    };
+  }
 
   inject (options) {
     super.inject(options);
