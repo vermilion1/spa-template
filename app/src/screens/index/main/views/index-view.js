@@ -5,6 +5,10 @@ import EventBehavior from '../../../../behaviors/event';
 
 export default class IndexView extends ItemView {
 
+  /**
+   * Define view's behaviours.
+   * @returns {Object}
+   */
   behaviors () {
     return {
       EventBehavior: {
@@ -13,6 +17,11 @@ export default class IndexView extends ItemView {
     };
   }
 
+  /**
+   * @override
+   * Inject view properties.
+   * @param {Object|undefined} options - View options.
+   */
   inject (options) {
     super.inject(options);
 
@@ -20,6 +29,10 @@ export default class IndexView extends ItemView {
     this.className = 'index';
   }
 
+  /**
+   * Inject extra data to the template data.
+   * @returns {Object}
+   */
   templateHelpers () {
     return {
       now: {

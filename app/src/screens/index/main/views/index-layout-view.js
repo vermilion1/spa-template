@@ -5,6 +5,11 @@ import template from '../templates/layout.hbs';
 
 export default class LayoutView extends ScreenLayoutView {
 
+  /**
+   * @override
+   * Inject view properties.
+   * @param {Object|undefined} options - View options.
+   */
   inject (options) {
     super.inject(options);
 
@@ -15,10 +20,16 @@ export default class LayoutView extends ScreenLayoutView {
     };
   }
 
-  showNavigation (collection) {
-    this.navigationRegion.show(new NavigationView({collection: collection}));
+  /**
+   * Show navigation region.
+   */
+  showNavigation () {
+    this.navigationRegion.show(new NavigationView());
   }
 
+  /**
+   * Show content region.
+   */
   showContent () {
     this.contentRegion.show(new IndexView());
   }
