@@ -2,6 +2,12 @@
   "clean": {
     "src": ["./dist", "./tmp"]
   },
+  "test": {
+    "configFile": "./karma.conf.js",
+    "files": [
+      "./app/src/**/*.spec.js"
+    ]
+  },
   "connect": {
     "root": ["./dist"]
   },

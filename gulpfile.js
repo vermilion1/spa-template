@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var _ = require('underscore');
+var path = require('path');
 var config = require('./config');
 var pkg = require('./package');
 var args = require('yargs').argv;
@@ -8,6 +9,7 @@ var isDev = env === 'development';
 var isProd = !isDev;
 var extend = _.extend.bind(_);
 var plugins = extend(require('gulp-load-plugins')(), {
+  karma: require('karma').server,
   sprite: require('css-sprite').stream,
   hbsfy: require('hbsfy').configure({extensions: ['hbs']}),
   sequence: require('run-sequence'),
@@ -117,13 +119,20 @@ gulp.task('sprites', function() {
     );
 });
 
+gulp.task('test', function (done) {
+  return plugins.karma.start({
+    configFile: path.resolve(config.test.configFile),
+    singleRun: true
+  }, done);
+});
+
 gulp.task('default', ['build'], function () {
   gulp.start('watch');
 });
 
 gulp.task('build', ['clean'], function () {
   plugins.sequence(
-    ['jshint', 'js:traceur', 'js:copy-deps', 'js:vendor', 'images', 'sprites'],
+    ['jshint', 'test', 'js:traceur', 'js:copy-deps', 'js:vendor', 'images', 'sprites'],
     ['less:common', 'less:app', 'js:browserify'],
     ['html']
   );

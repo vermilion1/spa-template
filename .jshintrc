@@ -1,6 +1,7 @@
 {
   "node": true,
   "browser": true,
+  "mocha": true,
   "es3":  true,
   "esnext": true,
   "bitwise": true,
@@ -20,6 +21,7 @@
   "expr": true,
   "scripturl":  true,
   "globals": {
-    "require": true
+    "require": true,
+    "expect": true
   }
 }
