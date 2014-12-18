@@ -70,7 +70,5 @@ And check out `./dist` directory.
 
 ###TODO
 
- - Add comments
- - Describe the structure
  - Karma + Protractor
- - Add some icon font generator (Low priority)
+ - Describe the structure

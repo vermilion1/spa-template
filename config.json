@@ -5,7 +5,7 @@
   "test": {
     "configFile": "./karma.conf.js",
     "files": [
-      "./app/src/**/*.spec.js"
+      "./tmp/js/**/*.spec.js"
     ]
   },
   "connect": {

@@ -132,8 +132,8 @@ gulp.task('default', ['build'], function () {
 
 gulp.task('build', ['clean'], function () {
   plugins.sequence(
-    ['jshint', 'test', 'js:traceur', 'js:copy-deps', 'js:vendor', 'images', 'sprites'],
-    ['less:common', 'less:app', 'js:browserify'],
+    ['jshint', 'js:traceur', 'js:copy-deps', 'js:vendor', 'images', 'sprites'],
+    ['less:common', 'less:app', 'js:browserify', 'test'],
     ['html']
   );
 });
