@@ -1,16 +1,15 @@
-var config = require('./config');
+var configFile = require('./config');
 
-module.exports = function(conf) {
-  conf.set({
-    browsers: ['PhantomJS'],
-    frameworks: ['mocha', 'chai', 'sinon'],
+module.exports = function(config) {
+  config.set({
+    browsers: ['Chrome'],
+    frameworks: ['mocha', 'chai', 'sinon', 'browserify'],
+    files: configFile.test.files,
     reporters: 'dots',
-    plugins: [
-      'karma-mocha',
-      'karma-chai',
-      'karma-sinon',
-      'karma-phantomjs-launcher'
-    ],
-    files: config.test.files
+    preprocessors: configFile.test.preprocessors,
+    browserify: {
+      transform: ['hbsfy', 'es6ify'],
+      extensions: ['.hbs', '.js']
+    }
   });
 };

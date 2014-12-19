@@ -2,14 +2,8 @@
   "clean": {
     "src": ["./dist", "./tmp"]
   },
-  "test": {
-    "configFile": "./karma.conf.js",
-    "files": [
-      "./tmp/js/**/*.spec.js"
-    ]
-  },
-  "connect": {
-    "root": ["./dist"]
+  "server": {
+    "port": 9001
   },
   "jshint": {
     "src": [
@@ -82,7 +76,22 @@
     "spriteDest": "./dist/images",
     "styleDest": "./app/less"
   },
-  "server": {
-    "port": 9001
+  "test": {
+    "configFile": "./karma.conf.js",
+    "files": [
+      "./bower_components/jquery/dist/jquery.js",
+      "./bower_components/underscore/underscore.js",
+      "./bower_components/backbone/backbone.js",
+      "./bower_components/backbone.controller/backbone.controller.js",
+      "./bower_components/backbone.stickit/backbone.stickit.js",
+      "./bower_components/marionette/lib/backbone.marionette.js",
+      "./bower_components/polyglot/build/polyglot.js",
+      "./bower_components/moment/moment.js",
+      "./bower_components/traceur-runtime/traceur-runtime.js",
+      "./app/src/**/*.spec.js"
+    ],
+    "preprocessors": {
+      "./app/src/**/*.spec.js": ["browserify"]
+    }
   }
 }

@@ -70,5 +70,6 @@ And check out `./dist` directory.
 
 ###TODO
 
- - Karma + Protractor
+ - Try es6ify for build
+ - Protractor
  - Describe the structure
