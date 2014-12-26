@@ -1,6 +1,6 @@
 {
   "clean": {
-    "src": ["./dist", "./tmp"]
+    "src": ["./dist"]
   },
   "server": {
     "port": 9001
@@ -12,19 +12,8 @@
     ]
   },
   "jsApp": {
-    "watch": ["./app/src/**/*.js", "./app/src/**/*.hbs", "./app/lang/*.json"]
-  },
-  "jsTraceur": {
-    "src": ["./app/src/**/*.js"],
-    "dest": "./tmp/js"
-  },
-  "jsCopyDeps": {
-    "src": ["./app/src/**/*.hbs", "./app/lang/*.json"],
-    "hbsDest": "./tmp/js",
-    "jsonDest": "./tmp/lang"
-  },
-  "jsBrowserify": {
-    "src": ["./tmp/js/index.js"],
+    "watch": ["./app/src/**/*.js", "./app/src/**/*.hbs", "./app/lang/*.json"],
+    "src": ["./app/src/index.js"],
     "dest": "./dist/js"
   },
   "jsVendor": {

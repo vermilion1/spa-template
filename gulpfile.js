@@ -11,6 +11,7 @@ var extend = _.extend.bind(_);
 var plugins = extend(require('gulp-load-plugins')(), {
   karma: require('karma').server,
   sprite: require('css-sprite').stream,
+  es6ify: require('es6ify'),
   hbsfy: require('hbsfy').configure({extensions: ['hbs']}),
   sequence: require('run-sequence'),
   del: require('del')
@@ -47,28 +48,11 @@ gulp.task('less:app', function() {
 });
 
 gulp.task('js:app', function() {
-  plugins.sequence(['js:traceur', 'js:copy-deps'], ['js:browserify']);
-});
-
-gulp.task('js:traceur', function() {
-  return gulp.src(config.jsTraceur.src)
+  return gulp.src(config.jsApp.src)
     .pipe(plugins.plumber())
-    .pipe(plugins.traceur({modules: 'commonjs'}))
-    .pipe(gulp.dest(config.jsTraceur.dest));
-});
-
-gulp.task('js:copy-deps', function() {
-  return gulp.src(config.jsCopyDeps.src)
-    .pipe(plugins['if']('*.hbs', gulp.dest(config.jsCopyDeps.hbsDest)))
-    .pipe(plugins['if']('*.json', gulp.dest(config.jsCopyDeps.jsonDest)));
-});
-
-gulp.task('js:browserify', function() {
-  return gulp.src(config.jsBrowserify.src)
-    .pipe(plugins.plumber())
-    .pipe(plugins.browserify({transform: [plugins.hbsfy]}))
+    .pipe(plugins.browserify({debug: true, transform: [plugins.hbsfy, plugins.es6ify]}))
     .pipe(plugins['if'](isProd, plugins.uglify()))
-    .pipe(gulp.dest(config.jsBrowserify.dest));
+    .pipe(gulp.dest(config.jsApp.dest));
 });
 
 gulp.task('js:vendor', function() {
@@ -132,9 +116,9 @@ gulp.task('default', ['build'], function () {
 
 gulp.task('build', ['clean'], function () {
   plugins.sequence(
-    ['jshint', 'test'],
-    ['js:traceur', 'js:copy-deps', 'js:vendor', 'images', 'sprites'],
-    ['less:common', 'less:app', 'js:browserify'],
+    ['jshint', 'test', 'js:vendor', 'js:app', 'images'],
+    ['sprites'],
+    ['less:common', 'less:app'],
     ['html']
   );
 });

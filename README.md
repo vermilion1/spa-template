@@ -70,6 +70,5 @@ And check out `./dist` directory.
 
 ###TODO
 
- - Try es6ify for build
  - Protractor
  - Describe the structure
