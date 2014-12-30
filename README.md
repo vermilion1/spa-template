@@ -16,8 +16,8 @@ Using:
 
 ###Once cloned
 
-    npm install -g bower # or with sudo
-    npm install # or with sudo
+    sudo npm install -g bower
+    sudo npm install
     bower install
 
 
@@ -48,6 +48,12 @@ Simply run:
 And check out `./dist` directory.
 
 
+###Troubleshooting
+
+In case you got an error "No such file or directory" during running the protractor task please
+check out [this solution](https://github.com/joyent/node/issues/3911#issuecomment-8956154).
+
+
 ###Application structure
 
     images
@@ -70,5 +76,8 @@ And check out `./dist` directory.
 
 ###TODO
 
- - Protractor
+ - Protractor:
+    - Run build and server before running tests
+    - Add some tests
+
  - Describe the structure

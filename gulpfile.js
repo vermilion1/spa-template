@@ -1,3 +1,5 @@
+/* jshint camelcase: false */
+
 var gulp = require('gulp');
 var _ = require('underscore');
 var path = require('path');
@@ -103,11 +105,22 @@ gulp.task('sprites', function() {
     );
 });
 
-gulp.task('test', function (done) {
+gulp.task('karma', function (done) {
   return plugins.karma.start({
-    configFile: path.resolve(config.test.configFile),
+    configFile: path.resolve(config.karma.configFile),
     singleRun: true
   }, done);
+});
+
+gulp.task('protractor:update', plugins.protractor.webdriver_update);
+
+gulp.task('protractor', ['protractor:update'], function (cb) {
+  gulp.src(config.protractor.src)
+    .pipe(plugins.protractor.protractor({
+      configFile: config.protractor.configFile
+    }))
+    .on('error', function(e) { throw e; })
+    .on('end', cb);
 });
 
 gulp.task('default', ['build'], function () {
@@ -116,7 +129,7 @@ gulp.task('default', ['build'], function () {
 
 gulp.task('build', ['clean'], function () {
   plugins.sequence(
-    ['jshint', 'test', 'js:vendor', 'js:app', 'images'],
+    ['jshint', 'karma', 'js:vendor', 'js:app', 'images'],
     ['sprites'],
     ['less:common', 'less:app'],
     ['html']

@@ -65,7 +65,7 @@
     "spriteDest": "./dist/images",
     "styleDest": "./app/less"
   },
-  "test": {
+  "karma": {
     "configFile": "./karma.conf.js",
     "files": [
       "./bower_components/jquery/dist/jquery.js",
@@ -82,5 +82,11 @@
     "preprocessors": {
       "./app/src/**/*.spec.js": ["browserify"]
     }
+  },
+  "protractor": {
+    "src": [],
+    "configFile": "./protractor.conf.js",
+    "specs": ["./app/src/**/*.e2e-spec.js"],
+    "seleniumServerJar": "./node_modules/protractor/selenium/selenium-server-standalone-2.44.0.jar"
   }
 }
