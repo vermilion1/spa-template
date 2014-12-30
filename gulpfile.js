@@ -23,6 +23,13 @@ gulp.task('clean', function(cb) {
   return plugins.del(config.clean.src, cb);
 });
 
+gulp.task('server', function () {
+  return gulp.src(config.server.src)
+    .pipe(plugins.webserver({
+      port: config.server.port
+    }));
+});
+
 gulp.task('jshint', function() {
   return gulp.src(config.jshint.src)
     .pipe(plugins.plumber())
@@ -124,7 +131,7 @@ gulp.task('protractor', ['protractor:update'], function (cb) {
 });
 
 gulp.task('default', ['build'], function () {
-  gulp.start('watch');
+  gulp.start(['server', 'watch']);
 });
 
 gulp.task('build', ['clean'], function () {

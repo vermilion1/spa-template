@@ -3,6 +3,7 @@
     "src": ["./dist"]
   },
   "server": {
+    "src": "./",
     "port": 9001
   },
   "jshint": {
