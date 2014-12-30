@@ -87,6 +87,7 @@
     "src": [],
     "configFile": "./protractor.conf.js",
     "specs": ["./app/src/**/*.e2e-spec.js"],
-    "seleniumServerJar": "./node_modules/protractor/selenium/selenium-server-standalone-2.44.0.jar"
+    "seleniumServerJar": "./node_modules/protractor/selenium/selenium-server-standalone-2.44.0.jar",
+    "chromeDriver": "./node_modules/protractor/selenium/chromedriver"
   }
 }
