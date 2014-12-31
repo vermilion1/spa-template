@@ -39,6 +39,17 @@ Simply run:
 And check out `./dist` directory.
 
 
+###Testing
+
+Application tests (unit using karma and functional using protractor) runs after each build.
+
+**NOTE**: Functional tests should be run only after successful build.
+
+To run tests manually:
+
+    npm test
+
+
 ###Troubleshooting
 
 In case you got an error "No such file or directory" during running the protractor task please
@@ -66,9 +77,5 @@ check out [this solution](https://github.com/joyent/node/issues/3911#issuecommen
 
 
 ###TODO
-
- - Protractor:
-    - Run build and server before running tests
-    - Add some tests
 
  - Describe the structure

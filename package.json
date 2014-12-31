@@ -48,6 +48,7 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/gulp --env=development",
-    "build": "./node_modules/.bin/gulp build --env=production"
+    "build": "./node_modules/.bin/gulp build --env=production && npm test",
+    "test": "./node_modules/.bin/gulp karma protractor"
   }
 }

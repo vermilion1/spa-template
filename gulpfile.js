@@ -1,4 +1,4 @@
-/* jshint camelcase: false */
+/* jshint camelcase: false, boss:true */
 
 var gulp = require('gulp');
 var _ = require('underscore');
@@ -10,6 +10,7 @@ var env = args.env || 'production';
 var isDev = env === 'development';
 var isProd = !isDev;
 var extend = _.extend.bind(_);
+var streams = {};
 var plugins = extend(require('gulp-load-plugins')(), {
   karma: require('karma').server,
   sprite: require('css-sprite').stream,
@@ -19,25 +20,25 @@ var plugins = extend(require('gulp-load-plugins')(), {
   del: require('del')
 });
 
-gulp.task('clean', function(cb) {
+gulp.task('clean', function (cb) {
   return plugins.del(config.clean.src, cb);
 });
 
 gulp.task('server', function () {
-  return gulp.src(config.server.src)
+  return streams.server = gulp.src(config.server.src)
     .pipe(plugins.webserver({
       port: config.server.port
     }));
 });
 
-gulp.task('jshint', function() {
+gulp.task('jshint', function () {
   return gulp.src(config.jshint.src)
     .pipe(plugins.plumber())
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('less:common', function() {
+gulp.task('less:common', function () {
   return gulp.src(config.lessCommon.src)
     .pipe(plugins.plumber())
     .pipe(plugins.less())
@@ -46,7 +47,7 @@ gulp.task('less:common', function() {
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
-gulp.task('less:app', function() {
+gulp.task('less:app', function () {
   return gulp.src(config.lessApp.src)
     .pipe(plugins.plumber())
     .pipe(plugins.less())
@@ -56,7 +57,7 @@ gulp.task('less:app', function() {
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
-gulp.task('js:app', function() {
+gulp.task('js:app', function () {
   return gulp.src(config.jsApp.src)
     .pipe(plugins.plumber())
     .pipe(plugins.browserify({debug: true, transform: [plugins.hbsfy, plugins.es6ify]}))
@@ -64,7 +65,7 @@ gulp.task('js:app', function() {
     .pipe(gulp.dest(config.jsApp.dest));
 });
 
-gulp.task('js:vendor', function() {
+gulp.task('js:vendor', function () {
   return gulp.src(config.jsVendor.src)
     .pipe(plugins.plumber())
     .pipe(plugins.concat(config.jsVendor.name))
@@ -72,31 +73,31 @@ gulp.task('js:vendor', function() {
     .pipe(gulp.dest(config.jsVendor.dest));
 });
 
-gulp.task('html', function() {
+gulp.task('html', function () {
   return plugins.sequence(['html:compile'], ['html:min']);
 });
 
-gulp.task('html:compile', function() {
+gulp.task('html:compile', function () {
   return gulp.src(config.html.src)
     .pipe(plugins.preprocess({context: {title: pkg.title, description: pkg.description, env: env}}))
     .pipe(gulp.dest(config.html.dest))
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
-gulp.task('html:min', function() {
+gulp.task('html:min', function () {
   return gulp.src(config.htmlMin.src)
     .pipe(plugins.htmlmin({collapseWhitespace: true, minifyJS: true, minifyCSS: true}))
     .pipe(gulp.dest(config.htmlMin.dest));
 });
 
-gulp.task('images', function() {
+gulp.task('images', function () {
   return gulp.src(config.images.src)
     .pipe(plugins['if'](isProd, plugins.imagemin({progressive: true, interlaced: true})))
     .pipe(gulp.dest(config.images.dest))
     .pipe(plugins['if'](isDev, plugins.livereload()));
 });
 
-gulp.task('sprites', function() {
+gulp.task('sprites', function () {
   return gulp.src(config.sprites.src)
     .pipe(plugins.sprite({
       name: config.sprites.name,
@@ -121,13 +122,15 @@ gulp.task('karma', function (done) {
 
 gulp.task('protractor:update', plugins.protractor.webdriver_update);
 
-gulp.task('protractor', ['protractor:update'], function (cb) {
+gulp.task('protractor', ['server', 'protractor:update'], function () {
   gulp.src(config.protractor.src)
     .pipe(plugins.protractor.protractor({
       configFile: config.protractor.configFile
     }))
     .on('error', function(e) { throw e; })
-    .on('end', cb);
+    .on('end', function () {
+      streams.server.emit('kill');
+    });
 });
 
 gulp.task('default', ['build'], function () {
@@ -136,14 +139,14 @@ gulp.task('default', ['build'], function () {
 
 gulp.task('build', ['clean'], function () {
   plugins.sequence(
-    ['jshint', 'karma', 'js:vendor', 'js:app', 'images'],
+    ['jshint', 'js:vendor', 'js:app', 'images'],
     ['sprites'],
     ['less:common', 'less:app'],
     ['html']
   );
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   gulp.watch(config.sprites.src, ['sprites']);
   gulp.watch(config.lessCommon.watch, ['less:common', 'less:app']);
   gulp.watch(config.lessApp.src, ['less:app']);
