@@ -12,6 +12,8 @@ Using:
  - Browserify
  - LESS
  - Bower
+ - Karma
+ - Protractor
 
 
 ###Once cloned
@@ -52,15 +54,17 @@ To run tests manually:
 
 ###Troubleshooting
 
-In case you got an error "No such file or directory" during running the protractor task please
+In case you got an error "No such file or directory" during running the protractor test please
 check out [this solution](https://github.com/joyent/node/issues/3911#issuecomment-8956154).
 
 
 ###Application structure
 
     images
+    lang
     less
     |--components
+    sprites
     src
     |--components
     |----component-name
